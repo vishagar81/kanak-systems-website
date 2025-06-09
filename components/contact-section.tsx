@@ -59,7 +59,7 @@ export function ContactSection() {
                 <Textarea id="message" placeholder="Tell us about your project requirements..." rows={4} />
               </div>
 
-              <Button className="w-full bg-emerald-600 hover:bg-emerald-700">
+              <Button className="w-full bg-purple-600 hover:bg-purple-700">
                 Send Message
                 <Send className="ml-2 h-4 w-4" />
               </Button>
@@ -78,8 +78,8 @@ export function ContactSection() {
 
             <div className="space-y-6">
               <div className="flex items-start space-x-4">
-                <div className="p-3 bg-emerald-100 rounded-lg">
-                  <Mail className="h-6 w-6 text-emerald-600" />
+                <div className="p-3 bg-purple-100 rounded-lg">
+                  <Mail className="h-6 w-6 text-purple-600" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Email Us</h4>
@@ -88,8 +88,8 @@ export function ContactSection() {
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="p-3 bg-emerald-100 rounded-lg">
-                  <Phone className="h-6 w-6 text-emerald-600" />
+                <div className="p-3 bg-purple-100 rounded-lg">
+                  <Phone className="h-6 w-6 text-purple-600" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Call Us</h4>
@@ -99,7 +99,7 @@ export function ContactSection() {
               
             </div>
 
-            <div className="bg-emerald-50 p-6 rounded-lg">
+            <div className="bg-purple-50 p-6 rounded-lg">
               <h4 className="font-semibold text-gray-900 mb-2">Business Hours</h4>
               <div className="space-y-1 text-sm text-gray-600">
                 <p>Monday - Friday: 9:00 AM - 6:00 PM</p>

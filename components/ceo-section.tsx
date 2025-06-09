@@ -76,11 +76,13 @@ export function CeoSection() {
           <div className="lg:col-span-1">
             <Card className="text-center">
               <CardContent className="p-8">
-                <div className="w-32 h-32 bg-gradient-to-br from-emerald-100 to-emerald-200 rounded-full mx-auto mb-6 flex items-center justify-center">
-                  <span className="text-4xl font-bold text-emerald-700">VA</span>
+                <div className="w-32 h-32 bg-gradient-to-br from-purple-100 to-violet-200 rounded-full mx-auto mb-6 flex items-center justify-center">
+                  <span className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">
+                    VA
+                  </span>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Mr. Vishal Agarwal</h3>
-                <p className="text-lg text-emerald-600 mb-4">CEO & Technical Project Manager</p>
+                <p className="text-lg text-purple-600 mb-4">CEO & Technical Project Manager</p>
 
                 <div className="space-y-3 text-sm text-gray-600 mb-6">
                   <div className="flex items-center justify-center space-x-2">
@@ -102,7 +104,7 @@ export function CeoSection() {
                     href="https://www.linkedin.com/in/vishalagarwallondon"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-emerald-600 transition-colors"
+                    className="text-gray-400 hover:text-purple-600 transition-colors"
                   >
                     <Linkedin className="h-5 w-5" />
                   </a>
@@ -110,14 +112,17 @@ export function CeoSection() {
                     href="https://github.com/vishagar81"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-emerald-600 transition-colors"
+                    className="text-gray-400 hover:text-purple-600 transition-colors"
                   >
                     <Github className="h-5 w-5" />
                   </a>
                 </div>
                 <div className="mt-6 pt-6 border-t border-gray-200">
-                  <Button className="w-full bg-emerald-600 hover:bg-emerald-700" asChild>
-                    <a href="https://drive.google.com/file/d/1eBOMtR3OouefeQJSpcY4Fp6sCPxSbnJB/view?usp=sharing" download="Vishal-Agarwal-Resume.pdf">
+                  <Button
+                    className="w-full bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white"
+                    asChild
+                  >
+                    <a href="/resume/vishal-agarwal-resume.pdf" download="Vishal-Agarwal-Resume.pdf">
                       <Download className="h-4 w-4 mr-2" />
                       Download Resume
                     </a>
@@ -133,7 +138,7 @@ export function CeoSection() {
             <Card>
               <CardContent className="p-6">
                 <h4 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                  <Building2 className="h-5 w-5 text-emerald-600 mr-2" />
+                  <Building2 className="h-5 w-5 text-purple-600 mr-2" />
                   Career Summary
                 </h4>
                 <div className="space-y-3 text-gray-700">
@@ -170,7 +175,7 @@ export function CeoSection() {
               <Card>
                 <CardContent className="p-6">
                   <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                    <Award className="h-5 w-5 text-emerald-600 mr-2" />
+                    <Award className="h-5 w-5 text-purple-600 mr-2" />
                     Certifications
                   </h4>
                   <div className="space-y-2">
@@ -186,7 +191,7 @@ export function CeoSection() {
               <Card>
                 <CardContent className="p-6">
                   <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                    <GraduationCap className="h-5 w-5 text-emerald-600 mr-2" />
+                    <GraduationCap className="h-5 w-5 text-purple-600 mr-2" />
                     Education
                   </h4>
                   <div className="space-y-2 text-sm text-gray-700">
@@ -221,7 +226,7 @@ export function CeoSection() {
                   href="https://www.linkedin.com/pulse/remediate-technical-debt-genai-vishal-agarwal-jekze/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center text-emerald-600 hover:text-emerald-700 transition-colors"
+                  className="flex items-center text-purple-600 hover:text-purple-700 transition-colors"
                 >
                   <span className="text-sm">Remediate Technical Debt with GenAI</span>
                   <ExternalLink className="h-4 w-4 ml-2" />

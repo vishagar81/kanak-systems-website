@@ -57,7 +57,7 @@ export function AboutSection() {
                   "Continuous delivery with modern DevOps practices and automation",
                 ].map((item, index) => (
                   <li key={index} className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-emerald-600 mr-3 mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-purple-600 mr-3 mt-0.5 flex-shrink-0" />
                     <span className="text-gray-700">{item}</span>
                   </li>
                 ))}
@@ -70,8 +70,8 @@ export function AboutSection() {
             {benefits.map((benefit, index) => (
               <Card key={index} className="text-center p-6">
                 <CardContent className="space-y-4">
-                  <div className="mx-auto w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center">
-                    <benefit.icon className="h-6 w-6 text-emerald-600" />
+                  <div className="mx-auto w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <benefit.icon className="h-6 w-6 text-purple-600" />
                   </div>
                   <h3 className="font-semibold text-gray-900">{benefit.title}</h3>
                   <p className="text-sm text-gray-600">{benefit.description}</p>

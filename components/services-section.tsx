@@ -58,7 +58,7 @@ const services = [
   },
   {
     icon: Snowflake,
-    title: "Data Cloud Solutions",
+    title: "Snowflake Solutions",
     description: "Leverage data cloud technologies for scalable and secure data management.",
     features: ["Data warehousing", "ETL processes", "Real-time analytics", "Data governance"],    
   },
@@ -86,8 +86,8 @@ export function ServicesSection() {
             <Card key={index} className="group hover:shadow-lg transition-shadow duration-300">
               <CardHeader>
                 <div className="flex items-center space-x-4">
-                  <div className="p-3 bg-emerald-100 rounded-lg group-hover:bg-emerald-200 transition-colors">
-                    <service.icon className="h-6 w-6 text-emerald-600" />
+                  <div className="p-3 bg-gradient-to-br from-purple-100 to-violet-100 rounded-lg group-hover:from-purple-200 group-hover:to-violet-200 transition-colors">
+                    <service.icon className="h-6 w-6 text-purple-600" />
                   </div>
                   <div>
                     <CardTitle className="text-xl">{service.title}</CardTitle>
@@ -99,7 +99,7 @@ export function ServicesSection() {
                 <ul className="space-y-2">
                   {service.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-center text-sm text-gray-600">
-                      <ArrowRight className="h-4 w-4 text-emerald-600 mr-2 flex-shrink-0" />
+                      <ArrowRight className="h-4 w-4 text-purple-600 mr-2 flex-shrink-0" />
                       {feature}
                     </li>
                   ))}

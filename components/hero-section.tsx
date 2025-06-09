@@ -10,7 +10,7 @@ export function HeroSection() {
           <div className="space-y-8">
             <div className="space-y-4">
               <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Transform Your Business with <span className="text-emerald-600">21+ Years of Enterprise Expertise</span>
+                Transform Your Business with <span className="bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">21+ Years of Enterprise Expertise</span>
               </h1>
               <p className="text-xl text-gray-600 leading-relaxed">
                 Led by AWS Certified Solution Architect with proven track record at major financial institutions. We specialize in Cloud Migration, Application
@@ -19,11 +19,11 @@ export function HeroSection() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700">
+              <Button size="lg" className="bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white">
                 Start Your Journey
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button size="lg" variant="outline">
+              <Button size="lg" variant="outline" className="border-purple-200 text-purple-700 hover:bg-purple-50">
                 Learn More
               </Button>
             </div>
@@ -31,15 +31,15 @@ export function HeroSection() {
             {/* Key Stats */}
             <div className="grid grid-cols-3 gap-8 pt-8 border-t border-gray-200">
               <div className="text-center">
-                <div className="text-3xl font-bold text-emerald-600">100+</div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">100+</div>
                 <div className="text-sm text-gray-600">Enterprise Projects</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-emerald-600">£7M+</div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">£7M+</div>
                 <div className="text-sm text-gray-600">Programs Delivered</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-emerald-600">21+</div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">21+</div>
                 <div className="text-sm text-gray-600">Years Experience</div>
               </div>
             </div>
@@ -50,7 +50,7 @@ export function HeroSection() {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-4">
                 <div className="bg-white p-6 rounded-lg shadow-lg">
-                  <Cloud className="h-12 w-12 text-emerald-600 mb-4" />
+                  <Cloud className="h-12 w-12 text-purple-600 mb-4" />
                   <h3 className="font-semibold text-gray-900">Cloud Migration</h3>
                   <p className="text-sm text-gray-600">Seamless transition to cloud infrastructure</p>
                 </div>

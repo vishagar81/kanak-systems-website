@@ -117,7 +117,7 @@ PUBLICATIONS
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <FileText className="h-5 w-5 text-emerald-600 mr-2" />
+                  <FileText className="h-5 w-5 text-purple-600 mr-2" />
                   Resume Highlights
                 </CardTitle>
               </CardHeader>
@@ -125,7 +125,7 @@ PUBLICATIONS
                 {/* Experience Summary */}
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
-                    <Briefcase className="h-4 w-4 text-emerald-600 mr-2" />
+                    <Briefcase className="h-4 w-4 text-purple-600 mr-2" />
                     Key Experience
                   </h4>
                   <div className="grid md:grid-cols-2 gap-3 text-sm">
@@ -145,7 +145,7 @@ PUBLICATIONS
                 {/* Certifications */}
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
-                    <Award className="h-4 w-4 text-emerald-600 mr-2" />
+                    <Award className="h-4 w-4 text-purple-600 mr-2" />
                     Certifications
                   </h4>
                   <div className="flex flex-wrap gap-2">
@@ -157,7 +157,7 @@ PUBLICATIONS
                 {/* Education */}
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
-                    <GraduationCap className="h-4 w-4 text-emerald-600 mr-2" />
+                    <GraduationCap className="h-4 w-4 text-purple-600 mr-2" />
                     Education
                   </h4>
                   <div className="text-sm text-gray-700">
@@ -204,7 +204,7 @@ PUBLICATIONS
                 </p>
 
                 <div className="space-y-3">
-                  <Button onClick={handleDownload} className="w-full bg-emerald-600 hover:bg-emerald-700">
+                  <Button onClick={handleDownload} className="w-full bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white">
                     <Download className="h-4 w-4 mr-2" />
                     Download Resume (TXT)
                   </Button>
