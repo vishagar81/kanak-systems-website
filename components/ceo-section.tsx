@@ -162,7 +162,7 @@ export function CeoSection() {
                 <div className="grid md:grid-cols-2 gap-3">
                   {keyExperience.map((exp, index) => (
                     <div key={index} className="flex items-center text-sm text-gray-700">
-                      <div className="w-2 h-2 bg-emerald-600 rounded-full mr-3 flex-shrink-0"></div>
+                      <div className="w-2 h-2 bg-purple-600 rounded-full mr-3 flex-shrink-0"></div>
                       {exp}
                     </div>
                   ))}

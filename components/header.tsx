@@ -70,7 +70,7 @@ export function Header() {
               <a href="#contact" className="text-gray-700 hover:text-purple-600 transition-colors">
                 Contact
               </a>
-              <Button className="bg-emerald-600 hover:bg-emerald-700 w-full">Get Consultation</Button>
+              <Button className="bg-purple-600 hover:bg-purple-700 w-full">Get Consultation</Button>
             </nav>
           </div>
         )}
