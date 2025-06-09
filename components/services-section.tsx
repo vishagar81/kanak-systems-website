@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Cloud, RefreshCw, Zap, TestTube, ClipboardList, ArrowRight } from "lucide-react"
+import { Cloud, RefreshCw, Zap, TestTube, ClipboardList, ArrowRight, Snowflake, ToyBrick } from "lucide-react"
 
 const services = [
   {
@@ -55,6 +55,18 @@ const services = [
     title: "Cloud Adoption",
     description: "Strategic guidance for successful cloud adoption and digital transformation.",
     features: ["Cloud strategy", "Architecture design", "Best practices", "Training & support"],
+  },
+  {
+    icon: Snowflake,
+    title: "Data Cloud Solutions",
+    description: "Leverage data cloud technologies for scalable and secure data management.",
+    features: ["Data warehousing", "ETL processes", "Real-time analytics", "Data governance"],    
+  },
+  {
+    icon: ToyBrick,
+    title: "Salesforce Consulting",
+    description: "Maximize your Salesforce investment with expert configuration and customization.",
+    features: ["CRM optimization", "Custom app development", "Integration services", "User training"],    
   },
 ]
 
