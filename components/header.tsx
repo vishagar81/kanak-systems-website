@@ -16,7 +16,7 @@ export function Header() {
           <div className="flex-shrink-0 flex items-center">
             {/* <h1 className="text-2xl font-bold text-gray-900">Kanak Systems Ltd</h1> */}
             <Image
-              src="/logo-small.png"
+              src="/logo-small.svg"
               alt="Kanak Systems Ltd"
               width={300}
               height={75}
