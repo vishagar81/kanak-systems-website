@@ -97,7 +97,11 @@ export function BlogsList() {
                 </div>
                 <CardContent className="pt-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-3 hover:text-purple-600 transition-colors">
-                    <a href={`/blogs/${blog.id}`}>{blog.title}</a>
+                    {
+                      blog.link ?
+                        <a href={`${blog.link}`}>{blog.title}</a>
+                        : <a href={`/blogs/${blog.id}`}>{blog.title}</a>
+                    }
                   </h3>
                   <p className="text-gray-600 mb-4">{blog.excerpt}</p>
                   <div className="flex items-center text-sm text-gray-500 space-x-4">
