@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Calendar, Clock, User } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
 // Sample blog data
 const blogs = [
@@ -12,20 +13,22 @@ const blogs = [
     excerpt: "How generative AI can help identify, prioritize, and address technical debt in legacy systems.",
     category: "AI & ML",
     author: "Vishal Agarwal",
-    date: "June 5, 2024",
+    date: "May 22, 2024",
     readTime: "8 min read",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/remediate-tech-debt.png?height=400&width=600",
+    link: "https://www.linkedin.com/pulse/remediate-technical-debt-genai-vishal-agarwal-jekze/",
     featured: true,
   },
   {
     id: 2,
-    title: "Cloud Migration Strategies for Financial Institutions",
-    excerpt: "Best practices for migrating critical financial systems to the cloud with minimal disruption.",
-    category: "Cloud Migration",
+    title: "RAG Implementation for Enterprise Knowledge Bases",
+    excerpt: "Leveraging Retrieval Augmented Generation to enhance enterprise search and knowledge management.",
+    category: "AI & ML",
     author: "Vishal Agarwal",
-    date: "May 22, 2024",
-    readTime: "12 min read",
-    image: "/placeholder.svg?height=400&width=600",
+    date: "Mar 16, 2025",
+    readTime: "7 min read",
+    image: "/rag-flow.png?height=400&width=600",
+    link: "https://medium.com/p/a46d1f257079",
     featured: true,
   },
   {
@@ -114,7 +117,7 @@ export function BlogsList() {
                 </CardContent>
                 <CardFooter className="pt-0">
                   <Button variant="link" className="text-purple-600 hover:text-purple-700 p-0">
-                    Read More <ArrowRight className="h-4 w-4 ml-1" />
+                    <Link href={`${blog.link}`}>Read More </Link> <ArrowRight className="h-4 w-4 ml-1" />
                   </Button>
                 </CardFooter>
               </Card>
