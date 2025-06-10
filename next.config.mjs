@@ -8,6 +8,9 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    domains: [
+      'https://kanak-systems-website.vercel.app/',
+    ]
   },
 }
 

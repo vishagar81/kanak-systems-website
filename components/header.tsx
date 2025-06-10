@@ -16,7 +16,7 @@ export function Header() {
           <div className="flex-shrink-0 flex items-center">
             {/* <h1 className="text-2xl font-bold text-gray-900">Kanak Systems Ltd</h1> */}
             <Image
-              src="/logo-small.svg"
+              src="/images/logo-small.png"
               alt="Kanak Systems Ltd"
               width={300}
               height={75}
@@ -27,16 +27,16 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            <a href="#home" className="text-gray-700 hover:text-purple-600 transition-colors">
+            <a href="/" className="text-purple-700 hover:text-purple-900 transition-colors">
               Home
             </a>
-            <a href="#services" className="text-gray-700 hover:text-purple-600 transition-colors">
+            <a href="/#services" className="text-purple-700 hover:text-purple-900 transition-colors">
               Services
             </a>
-            <a href="#about" className="text-gray-700 hover:text-purple-600 transition-colors">
-              About
+            <a href="/blogs" className="text-purple-700 hover:text-purple-900 transition-colors">
+              Blogs
             </a>
-            <a href="#contact" className="text-gray-700 hover:text-purple-600 transition-colors">
+            <a href="/#contact" className="text-purple-700 hover:text-purple-900 transition-colors">
               Contact
             </a>
           </nav>
@@ -58,16 +58,16 @@ export function Header() {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t">
             <nav className="flex flex-col space-y-4">
-              <a href="#home" className="text-gray-700 hover:text-purple-600 transition-colors">
+              <a href="/" className="text-purple-700 hover:text-purple-600 transition-colors">
                 Home
               </a>
-              <a href="#services" className="text-gray-700 hover:text-purple-600 transition-colors">
+              <a href="/#services" className="text-purple-700 hover:text-purple-600 transition-colors">
                 Services
               </a>
-              <a href="#about" className="text-gray-700 hover:text-purple-600 transition-colors">
-                About
+              <a href="/blogs" className="text-purple-700 hover:text-purple-600 transition-colors">
+                Blogs
               </a>
-              <a href="#contact" className="text-gray-700 hover:text-purple-600 transition-colors">
+              <a href="/#contact" className="text-purple-700 hover:text-purple-600 transition-colors">
                 Contact
               </a>
               <Button className="bg-purple-600 hover:bg-purple-700 w-full">Get Consultation</Button>
