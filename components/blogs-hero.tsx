@@ -1,8 +1,19 @@
+'use client'
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Search } from "lucide-react"
+import { useState } from "react";
 
-export function BlogsHero() {
+export function BlogsHero(props: { parentCallback: (event: any) => void }) {
+  const { parentCallback } = props;
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {    
+    setSearchTerm(event.target.value);
+    parentCallback(event); // Call the parent callback with the event
+  };
+
+
   return (
     <section className="bg-gradient-to-br from-gray-50 to-purple-50 py-16 lg:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -23,6 +34,8 @@ export function BlogsHero() {
               type="text"
               placeholder="Search articles..."
               className="rounded-r-none border-r-0 border-purple-200 focus:border-purple-500"
+              onChange={handleSearchChange}
+              value={searchTerm}
             />
             <Button className="rounded-l-none bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700">
               <Search className="h-4 w-4" />

@@ -77,10 +77,28 @@ const blogs = [
   },
 ]
 
-export function BlogsList() {
+export function BlogsList(props: { blogTitle: string }) {
+  const { blogTitle } = props;
   // Separate featured and regular blogs
-  const featuredBlogs = blogs.filter((blog) => blog.featured)
-  const regularBlogs = blogs.filter((blog) => !blog.featured)
+  // Type definition for blog
+  type Blog = typeof blogs[0];
+
+  // Helper function to search through blog content
+  const filterBlogsBySearch = (blog: Blog, searchTerm: string) => {
+    const search = searchTerm.toLowerCase().trim();
+    if (!search) return true;
+    
+    return [blog.title, blog.excerpt, blog.category]
+      .map(str => str.toLowerCase())
+      .some(str => str.includes(search));
+  };
+
+  // Filter blogs with memoization for better performance
+  const filteredBlogs = blogs.filter(blog => !blogTitle || filterBlogsBySearch(blog, blogTitle));
+
+  // Separate featured and regular blogs
+  const featuredBlogs = filteredBlogs.filter(blog => blog.featured);
+  const regularBlogs = filteredBlogs.filter(blog => !blog.featured);
 
   return (
     <section className="py-16 bg-white">
@@ -92,8 +110,10 @@ export function BlogsList() {
             {featuredBlogs.map((blog) => (
               <Card key={blog.id} className="overflow-hidden border-purple-100 hover:shadow-lg transition-shadow">
                 <div className="relative h-64">
-                  <Image src={blog.image || "/placeholder.svg"} alt={blog.title} fill className="object-cover" />
-                  <Badge className="absolute top-4 left-4 bg-purple-600 hover:bg-purple-700">{blog.category}</Badge>
+                  <Link href={`${blog.link}`}>
+                    <Image src={blog.image || "/placeholder.svg"} alt={blog.title} fill className="object-cover" />
+                    <Badge className="absolute top-4 left-4 bg-purple-600 hover:bg-purple-700">{blog.category}</Badge>
+                  </Link>                  
                 </div>
                 <CardContent className="pt-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-3 hover:text-purple-600 transition-colors">
