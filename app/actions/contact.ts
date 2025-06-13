@@ -1,7 +1,8 @@
 "use server"
 
 import { z } from "zod"
-import { Resend } from "resend"
+import sgMail from "@sendgrid/mail"
+import { EmailTemplate } from "@/components/email-templates/consultant-request-template"
 
 // Define the schema for form validation
 const contactSchema = z.object({
@@ -54,24 +55,6 @@ export async function submitContactForm(prevState: ContactFormState, formData: F
 
     // In a real implementation, you would send an email here
     // Example with a hypothetical email service:
-    
-    const resend = new Resend(process.env.RESEND_API_KEY || "");
-
-    await resend.emails.send({
-      to: 'tiruvishal@gmail.com',
-      subject: `New Contact Form Submission from ${firstName} ${lastName}`,
-      html: `
-        <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${firstName} ${lastName}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Company:</strong> ${company}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message}</p>
-      `,
-      from: email
-    })
-    
-
     // console.log("Contact form submission:", {
     //   to: "tiruvishal@gmail.com",
     //   from: email,
@@ -81,12 +64,33 @@ export async function submitContactForm(prevState: ContactFormState, formData: F
     //   timestamp: new Date().toISOString(),
     // })
 
+    const htmlContent = await EmailTemplate({ firstName, lastName, email, company, message });
+    // console.log("HTML Content:", htmlContent);
+
+
+    // SendGrid setup
+    if (!process.env.SENDGRID_API_KEY) {
+      throw new Error("SENDGRID_API_KEY is not set in environment variables");
+    }
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
+
+    // Send the email using SendGrid
+    const emailStatus = await sgMail.send({
+      from: email,
+      to: 'tiruvishal@gmail.com',
+      subject: `New Business contact form from ${firstName} ${lastName}`,
+      // text: 'Hello, this is a test email from Vishal\'s portfolio site.',
+      html: htmlContent,
+    })
+    
+    // console.log("Email sent successfully:", JSON.stringify(emailStatus, null, 4));
+
     return {
       success: true,
       message: "Thank you for your message! We will get back to you within 24 hours.",
     }
   } catch (error) {
-    console.error("Error sending contact form:", error)
+    console.error("Error sending contact form:", JSON.stringify(error, null, 4));
     return {
       success: false,
       message: "Sorry, there was an error sending your message. Please try again or contact us directly.",
