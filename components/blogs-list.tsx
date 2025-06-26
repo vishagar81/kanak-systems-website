@@ -33,6 +33,18 @@ const blogs = [
   },
   {
     id: 3,
+    title: "Building an Intelligent Multi-Agent System",
+    excerpt: "Practical guide to designing and implementing a multi-agent system for complex problem solving.",
+    category: "AI & ML",
+    author: "Vishal Agarwal",
+    date: "Jun 25, 2025",
+    readTime: "8 min read",
+    image: "/animation.gif?height=400&width=600",    
+    link: "https://medium.com/p/a1cc2835230a",
+    featured: true,
+  },
+  {
+    id: 4,
     title: "Microservices vs. Monoliths: Making the Right Choice",
     excerpt: "A comprehensive comparison to help you decide the best architecture for your application.",
     category: "Modernization",
@@ -43,7 +55,7 @@ const blogs = [
     featured: false,
   },
   {
-    id: 4,
+    id: 5,
     title: "Serverless Architecture: Reducing Cloud Costs by 20%",
     excerpt: "How we helped a financial services client reduce their cloud expenditure through serverless adoption.",
     category: "Cloud Migration",
@@ -54,7 +66,7 @@ const blogs = [
     featured: false,
   },
   {
-    id: 5,
+    id: 6,
     title: "RAG Implementation for Enterprise Knowledge Bases",
     excerpt: "Leveraging Retrieval Augmented Generation to enhance enterprise search and knowledge management.",
     category: "AI & ML",
@@ -65,7 +77,7 @@ const blogs = [
     featured: false,
   },
   {
-    id: 6,
+    id: 7,
     title: "DevOps Best Practices for Regulated Industries",
     excerpt: "Implementing CI/CD pipelines while maintaining compliance in highly regulated sectors.",
     category: "DevOps",
@@ -97,8 +109,11 @@ export function BlogsList(props: { blogTitle: string }) {
   const filteredBlogs = blogs.filter(blog => !blogTitle || filterBlogsBySearch(blog, blogTitle));
 
   // Separate featured and regular blogs
-  const featuredBlogs = filteredBlogs.filter(blog => blog.featured);
-  const regularBlogs = filteredBlogs.filter(blog => !blog.featured);
+  const featuredBlogs = filteredBlogs.filter(blog => blog.featured)
+                        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  const regularBlogs = filteredBlogs.filter(blog => !blog.featured)
+                        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
     <section className="py-16 bg-white">
