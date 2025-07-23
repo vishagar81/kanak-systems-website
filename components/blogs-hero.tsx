@@ -33,13 +33,13 @@ export function BlogsHero(props: { parentCallback: (event: any) => void }) {
             <Input
               type="text"
               placeholder="Search articles..."
-              className="rounded-r-none border-r-0 border-purple-200 focus:border-purple-500"
+              className="rounded-r-sm border-purple-200 focus:border-purple-500"
               onChange={handleSearchChange}
               value={searchTerm}
             />
-            <Button className="rounded-l-none bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700">
+            {/* <Button className="rounded-l-none bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700">
               <Search className="h-4 w-4" />
-            </Button>
+            </Button> */}
           </div>
 
           {/* Categories */}

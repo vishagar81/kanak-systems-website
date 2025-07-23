@@ -35,12 +35,24 @@ const blogs = [
     id: 3,
     title: "Building an Intelligent Multi-Agent System",
     excerpt: "Practical guide to designing and implementing a multi-agent system for complex problem solving.",
-    category: "AI & ML",
+    category: "Agentic AI",
     author: "Vishal Agarwal",
     date: "Jun 25, 2025",
     readTime: "8 min read",
     image: "/animation.gif?height=400&width=600",    
     link: "https://medium.com/p/a1cc2835230a",
+    featured: true,
+  },
+  {
+    id: 3,
+    title: "Agentic Workflow for Asylum Claims Processing",
+    excerpt: "How Multi-Agent AI could Transform Government Decision-Making",
+    category: "Agentic AI",
+    author: "Vishal Agarwal",
+    date: "Jul 23, 2025",
+    readTime: "8 min read",
+    image: "/agentic-asylum-flow.png?height=400&width=600",    
+    link: "https://medium.com/p/3b1831e37e1c",
     featured: true,
   },
   {
@@ -165,7 +177,7 @@ export function BlogsList(props: { blogTitle: string }) {
         </div>
 
         {/* Regular Blogs */}
-        <div>
+        {/* <div>
           <h2 className="text-2xl font-bold text-gray-900 mb-8">Recent Articles</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {regularBlogs.map((blog) => (
@@ -198,7 +210,7 @@ export function BlogsList(props: { blogTitle: string }) {
               </Card>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Load More Button */}
         <div className="mt-12 text-center">
