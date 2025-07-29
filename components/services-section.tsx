@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Cloud, RefreshCw, Zap, TestTube, ClipboardList, ArrowRight, Snowflake, ToyBrick } from "lucide-react"
+import { Cloud, RefreshCw, Zap, TestTube, ClipboardList, ArrowRight, Snowflake, ToyBrick, Bot } from "lucide-react"
 
 const services = [
   {
@@ -67,6 +67,18 @@ const services = [
     title: "Salesforce Consulting",
     description: "Maximize your Salesforce investment with expert configuration and customization.",
     features: ["CRM optimization", "Custom app development", "Integration services", "User training"],    
+  },
+  {
+    icon: Bot,
+    title: "Agentic AI Solutions",
+    description:
+      "Leverage Agentic AI frameworks to automate complex business workflows and enhance decision-making.",
+    features: [
+      "OpenAI, Claude, AWS Bedrock integration & deployments",
+      "RAG & AI agents development",
+      "Model Selection & Fine-tuning",
+      "Agent to Agent communciation, tooling (MCP) & Guardrails",
+    ],
   },
 ]
 

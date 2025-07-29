@@ -44,7 +44,7 @@ const blogs = [
     featured: true,
   },
   {
-    id: 3,
+    id: 4,
     title: "Agentic Workflow for Asylum Claims Processing",
     excerpt: "How Multi-Agent AI could Transform Government Decision-Making",
     category: "Agentic AI",
@@ -56,7 +56,7 @@ const blogs = [
     featured: true,
   },
   {
-    id: 4,
+    id: 5,
     title: "Microservices vs. Monoliths: Making the Right Choice",
     excerpt: "A comprehensive comparison to help you decide the best architecture for your application.",
     category: "Modernization",
@@ -67,7 +67,7 @@ const blogs = [
     featured: false,
   },
   {
-    id: 5,
+    id: 6,
     title: "Serverless Architecture: Reducing Cloud Costs by 20%",
     excerpt: "How we helped a financial services client reduce their cloud expenditure through serverless adoption.",
     category: "Cloud Migration",
@@ -78,7 +78,7 @@ const blogs = [
     featured: false,
   },
   {
-    id: 6,
+    id: 7,
     title: "RAG Implementation for Enterprise Knowledge Bases",
     excerpt: "Leveraging Retrieval Augmented Generation to enhance enterprise search and knowledge management.",
     category: "AI & ML",
@@ -89,7 +89,7 @@ const blogs = [
     featured: false,
   },
   {
-    id: 7,
+    id: 8,
     title: "DevOps Best Practices for Regulated Industries",
     excerpt: "Implementing CI/CD pipelines while maintaining compliance in highly regulated sectors.",
     category: "DevOps",

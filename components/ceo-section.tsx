@@ -10,12 +10,13 @@ export function CeoSection() {
   ]
 
   const keyExperience = [
-    "Transport for London - Technical Project Manager",
-    "London Stock Exchange Group - Program Manager",
-    "Schroders Personal Wealth - Technical Program Manager",
-    "RBS/Natwest - Lead Developer",
-    "HSBC Global Banking - Lead Developer",
-    "JP Morgan CIB - Applications Developer Advanced",
+    "Transport for London",
+    "London Stock Exchange Group",
+    "Schroders Personal Wealth",
+    "RBS/Natwest",
+    "HSBC Global Banking",
+    "JP Morgan",
+    "Nationwide Building Society"
   ]
 
   const technologies = [
@@ -65,7 +66,7 @@ export function CeoSection() {
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Meet Our CEO & Founder</h2>
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Meet Our Founder</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Leading digital transformation with 21+ years of enterprise experience
           </p>
@@ -82,12 +83,12 @@ export function CeoSection() {
                   </span>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Mr. Vishal Agarwal</h3>
-                <p className="text-lg text-purple-600 mb-4">CEO & Technical Project Manager</p>
+                <p className="text-lg text-purple-600 mb-4">Founder</p>
 
                 <div className="space-y-3 text-sm text-gray-600 mb-6">
                   <div className="flex items-center justify-center space-x-2">
                     <Mail className="h-4 w-4" />
-                    <span>tiruvishal@gmail.com</span>
+                    <span>kanaksystemsltd@gmail.com</span>
                   </div>
                   <div className="flex items-center justify-center space-x-2">
                     <Phone className="h-4 w-4" />
@@ -148,6 +149,7 @@ export function CeoSection() {
                     Computing
                   </p>
                   <p>• Proven experience of handling AI/LLM/Copilot projects in geographically distributed teams</p>
+                  <p>• AI Adoption, Implementation, Cloud Migration & Project Transformation consulting services</p>
                   <p>• Experience building large scale, high throughput distributed systems and scaling web services</p>
                   <p>• Expertise in application modernisation, SaaS platform transformation (PaaS) to cloud</p>
                   <p>• Successfully delivered £7M+ in change programmes across major financial institutions</p>

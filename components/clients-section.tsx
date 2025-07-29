@@ -85,7 +85,7 @@ export function ClientsSection() {
           </div>
           <div className="text-center">
             <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent mb-2">
-              100+
+              15+
             </div>
             <div className="text-sm text-gray-600">Projects Completed</div>
           </div>

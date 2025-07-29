@@ -56,7 +56,7 @@ export async function submitContactForm(prevState: ContactFormState, formData: F
     // In a real implementation, you would send an email here
     // Example with a hypothetical email service:
     // console.log("Contact form submission:", {
-    //   to: "tiruvishal@gmail.com",
+    //   to: "kanaksystemsltd@gmail.com",
     //   from: email,
     //   name: `${firstName} ${lastName}`,
     //   company,
@@ -77,7 +77,7 @@ export async function submitContactForm(prevState: ContactFormState, formData: F
     // Send the email using SendGrid
     const emailStatus = await sgMail.send({
       from: email,
-      to: 'tiruvishal@gmail.com',
+      to: 'kanaksystemsltd@gmail.com',
       subject: `New Business contact form from ${firstName} ${lastName}`,
       // text: 'Hello, this is a test email from Vishal\'s portfolio site.',
       html: htmlContent,

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Cloud, Cpu, Zap } from "lucide-react"
+import { ArrowRight, Cloud, Cpu, Zap, Bot } from "lucide-react"
 
 export function HeroSection() {
   return (
@@ -13,8 +13,8 @@ export function HeroSection() {
                 Transform Your Business with <span className="bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">21+ Years of Enterprise Expertise</span>
               </h1>
               <p className="text-xl text-gray-600 leading-relaxed">
-                Led by AWS Certified Solution Architect with proven track record at major financial institutions. We specialize in Cloud Migration, Application
-                Modernization, Generative AI solutions, and enterprise-scale digital transformation.
+                Led by hands on Certified Solution Architect with proven track record of running multi million pound transformation programs. We specialize in Cloud Migration, Application
+                Modernization, AI Adoption, Agentic AI Workflows, Generative AI solutions, and enterprise-scale digital transformation.
               </p>
             </div>
 
@@ -31,7 +31,7 @@ export function HeroSection() {
             {/* Key Stats */}
             <div className="grid grid-cols-3 gap-8 pt-8 border-t border-gray-200">
               <div className="text-center">
-                <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">100+</div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">15+</div>
                 <div className="text-sm text-gray-600">Enterprise Projects</div>
               </div>
               <div className="text-center">
@@ -65,6 +65,13 @@ export function HeroSection() {
                   <Cpu className="h-12 w-12 text-purple-600 mb-4" />
                   <h3 className="font-semibold text-gray-900">Modernization</h3>
                   <p className="text-sm text-gray-600">Transform legacy applications</p>
+                </div>
+                <div className="space-y-4 pt-8">
+                  <div className="bg-white p-6 rounded-lg shadow-lg">
+                    <Bot className="h-12 w-12 text-green-500 mb-4" />
+                    <h3 className="font-semibold text-gray-900">Agentic AI Workflows</h3>
+                    <p className="text-sm text-gray-600">Leveraging Agentic AI frameworks for automating business workflows</p>
+                  </div>
                 </div>
               </div>
             </div>

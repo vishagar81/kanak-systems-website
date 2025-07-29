@@ -28,7 +28,7 @@ export function BlogsHero(props: { parentCallback: (event: any) => void }) {
             Explore our latest thoughts on cloud migration, application modernization, and AI-driven transformation
           </p>
 
-          {/* Search Bar */}
+          {/* Search Bar */}          
           <div className="flex w-full max-w-md mx-auto">
             <Input
               type="text"
@@ -41,7 +41,7 @@ export function BlogsHero(props: { parentCallback: (event: any) => void }) {
               <Search className="h-4 w-4" />
             </Button> */}
           </div>
-
+          
           {/* Categories */}
           <div className="mt-8 flex flex-wrap justify-center gap-2">
             {["All", "Cloud Migration", "AI & ML", "Modernization", "DevOps", "Case Studies"].map((category) => (

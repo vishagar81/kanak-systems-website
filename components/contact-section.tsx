@@ -163,7 +163,7 @@ export function ContactSection() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Email Us</h4>
-                  <p className="text-gray-600">tiruvishal@gmail.com</p>
+                  <p className="text-gray-600">kanaksystemsltd@gmail.com</p>
                 </div>
               </div>
 
@@ -177,7 +177,7 @@ export function ContactSection() {
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4">
+              {/* <div className="flex items-start space-x-4">
                 <div className="p-3 bg-gradient-to-br from-purple-100 to-violet-100 rounded-lg">
                   <MapPin className="h-6 w-6 text-purple-600" />
                 </div>
@@ -185,7 +185,7 @@ export function ContactSection() {
                   <h4 className="font-semibold text-gray-900">Visit Us</h4>
                   <p className="text-gray-600">Aylesbury, HP22 7FS, UK</p>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             <div className="bg-gradient-to-br from-purple-50 to-violet-50 p-6 rounded-lg border border-purple-100">

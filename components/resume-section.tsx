@@ -13,7 +13,7 @@ VISHAL AGARWAL
 Technical Project Manager & CEO, Kanak Systems Ltd
 
 CONTACT INFORMATION
-Email: tiruvishal@gmail.com
+Email: kanaksystemsltd@gmail.com
 Phone: +44 7955877527
 Address: Aylesbury, HP22 7FS, UK
 LinkedIn: https://www.linkedin.com/in/vishalagarwallondon
