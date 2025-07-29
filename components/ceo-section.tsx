@@ -118,7 +118,7 @@ export function CeoSection() {
                     <Github className="h-5 w-5" />
                   </a>
                 </div>
-                <div className="mt-6 pt-6 border-t border-gray-200">
+                {/* <div className="mt-6 pt-6 border-t border-gray-200">
                   <Button
                     className="w-full bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white"
                     asChild
@@ -128,7 +128,7 @@ export function CeoSection() {
                       Download Resume
                     </a>
                   </Button>
-                </div>
+                </div> */}
               </CardContent>
             </Card>
           </div>
