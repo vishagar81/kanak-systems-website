@@ -104,13 +104,13 @@ export function Footer() {
                 <Mail className="h-4 w-4" />
                 <span>kanaksystemsltd@gmail.com</span>
               </div>
-              <div className="flex items-center space-x-2">
+              {/* <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4" />
                 <span>+44 7955877527</span>
-              </div>
+              </div> */}
               <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4" />
-                <span>Aylesbury, HP22 7FS, UK</span>
+                <span>Milton Keynes, UK</span>
               </div>
             </div>
           </div>

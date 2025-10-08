@@ -15,7 +15,7 @@ Technical Project Manager & CEO, Kanak Systems Ltd
 CONTACT INFORMATION
 Email: kanaksystemsltd@gmail.com
 Phone: +44 7955877527
-Address: Aylesbury, HP22 7FS, UK
+Address: Milton Keynes, MK4, UK
 LinkedIn: https://www.linkedin.com/in/vishalagarwallondon
 GitHub: https://github.com/vishagar81
 

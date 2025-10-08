@@ -167,7 +167,7 @@ export function ContactSection() {
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4">
+              {/* <div className="flex items-start space-x-4">
                 <div className="p-3 bg-gradient-to-br from-purple-100 to-violet-100 rounded-lg">
                   <Phone className="h-6 w-6 text-purple-600" />
                 </div>
@@ -175,7 +175,7 @@ export function ContactSection() {
                   <h4 className="font-semibold text-gray-900">Call Us</h4>
                   <p className="text-gray-600">+44 7955877527</p>
                 </div>
-              </div>
+              </div> */}
 
               {/* <div className="flex items-start space-x-4">
                 <div className="p-3 bg-gradient-to-br from-purple-100 to-violet-100 rounded-lg">
