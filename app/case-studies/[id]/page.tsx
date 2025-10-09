@@ -237,8 +237,9 @@ const getCaseStudy = async (id: string) => {
   return caseStudiesData[id] || null
 }
 
-export default async function CaseStudyPage({ params }: { params: { id: string } }) {
-  const caseStudy = await getCaseStudy(params.id)
+export default async function CaseStudyPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const caseStudy = await getCaseStudy(id)
 
   if (!caseStudy) {
     return (
