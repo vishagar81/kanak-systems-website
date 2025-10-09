@@ -35,7 +35,7 @@ export function Header() {
             <a href="/#services" className="text-purple-700 hover:rounded-sm hover:bg-purple-700 hover:text-white transition-colors">
               Services
             </a>
-            <Link href="/case-studies" className="text-purple-700 hover:bg-purple-700 hover:text-white transition-colors">
+            <Link href="/case-studies" className="text-purple-700 hover:rounded-sm hover:bg-purple-700 hover:text-white transition-colors">
               Case Studies
             </Link>
             <a href="/blogs" className="text-purple-700 hover:rounded-sm hover:bg-purple-700 hover:text-white transition-colors">
