@@ -1,5 +1,3 @@
-"use client"
-
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Badge } from "@/components/ui/badge"
@@ -9,6 +7,7 @@ import { ArrowLeft, Building2, Calendar, TrendingUp, Users, CheckCircle, Target,
 import Image from "next/image"
 import Link from "next/link"
 import { ClientsTicker } from "@/components/clients-ticker"
+import { CaseStudyContent } from "@/components/case-study-content"
 
 // This would typically come from a CMS or database
 const getCaseStudy = async (id: string) => {
@@ -23,7 +22,7 @@ const getCaseStudy = async (id: string) => {
       programmeValue: "£5M",
       excerpt:
         "Led a £5M AI programme implementing GenAI solutions across data analytics division, achieving 18-20% productivity improvement.",
-      image: "/placeholder.svg?height=600&width=1200&text=LSEG+Case+Study",
+      image: "/stocks.png?height=600&width=1200&text=LSEG+Case+Study",
       challenge: `The London Stock Exchange Group's Data Analytics division needed to modernize their development processes and leverage cutting-edge AI technologies to maintain competitive advantage in financial data services. The organization faced challenges with:
 
 • Manual, time-consuming development workflows across geographically distributed teams
@@ -97,7 +96,7 @@ const getCaseStudy = async (id: string) => {
       programmeValue: "Enterprise-scale transformation",
       excerpt:
         "Managing delivery and governance of multiple large-scale projects with end-to-end technology capability enhancements.",
-      image: "/placeholder.svg?height=600&width=1200&text=TfL+Case+Study",
+      image: "/underground.png?height=600&width=1200&text=TfL+Case+Study",
       challenge: `Transport for London required comprehensive project management for multiple concurrent digital transformation initiatives affecting millions of daily passengers. Key challenges included:
 
 • Complex stakeholder management across multiple government and transport organizations
@@ -169,7 +168,7 @@ const getCaseStudy = async (id: string) => {
       programmeValue: "£2M",
       excerpt:
         "Delivered end-to-end serverless solution for Fraud and Financial Crime, reducing cloud expenditure by 20%.",
-      image: "/placeholder.svg?height=600&width=1200&text=Schroders+Case+Study",
+      image: "/asset-management.png?height=600&width=1200&text=Schroders+Case+Study",
       challenge: `Schroders Personal Wealth needed to modernize their fraud detection and financial crime prevention systems while reducing operational costs. The legacy system faced:
 
 • High cloud infrastructure costs due to inefficient architecture
@@ -428,37 +427,7 @@ export default async function CaseStudyPage({ params }: { params: { id: string }
         )}
 
         {/* CTA Section */}
-        <section className="py-16">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Ready to Transform Your Business?</h2>
-            <p className="text-xl text-gray-600 mb-8">
-              Let's discuss how we can help you achieve similar results for your organization.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                className="bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700"
-                onClick={() => {
-                  const contactSection = document.getElementById("contact")
-                  if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: "smooth" })
-                  } else {
-                    window.location.href = "/#contact"
-                  }
-                }}
-              >
-                Get Free Consultation
-              </Button>
-              <Link href="/case-studies">
-                <Button
-                  variant="outline"
-                  className="border-purple-200 text-purple-700 hover:bg-purple-50 bg-transparent"
-                >
-                  View More Case Studies
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </section>
+        <CaseStudyContent />
 
         {/* Social Proof */}
         <section className="border-t border-gray-200 pt-16">
