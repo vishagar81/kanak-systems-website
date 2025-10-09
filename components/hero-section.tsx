@@ -31,7 +31,7 @@ export function HeroSection() {
             {/* Key Stats */}
             <div className="grid grid-cols-3 gap-8 pt-8 border-t border-gray-200">
               <div className="text-center">
-                <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">15+</div>
+                <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">50+</div>
                 <div className="text-sm text-gray-600">Enterprise Projects</div>
               </div>
               <div className="text-center">

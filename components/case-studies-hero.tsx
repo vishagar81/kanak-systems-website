@@ -2,7 +2,7 @@ import { Award, TrendingUp, Users, Zap } from "lucide-react"
 
 export function CaseStudiesHero() {
   const stats = [
-    { icon: Award, value: "100+", label: "Projects Completed" },
+    { icon: Award, value: "50+", label: "Projects Completed" },
     { icon: TrendingUp, value: "£7M+", label: "Programs Delivered" },
     { icon: Users, value: "14+", label: "Major Clients" },
     { icon: Zap, value: "20%", label: "Average Cost Reduction" },
