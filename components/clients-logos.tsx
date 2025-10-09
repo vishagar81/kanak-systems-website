@@ -1,30 +1,22 @@
 import Image from "next/image"
 
-const majorClients = [
-  {
-    name: "Transport for London",
-    logo: "/placeholder.svg?height=60&width=150&text=TfL",
-  },
-  {
-    name: "London Stock Exchange Group",
-    logo: "/placeholder.svg?height=60&width=150&text=LSEG",
-  },
+const majorClients = [  
   {
     name: "Schroders",
-    logo: "/placeholder.svg?height=60&width=150&text=Schroders",
+    logo: "/spw.svg?height=60&width=150&text=Schroders",
   },
   {
     name: "RBS/NatWest",
-    logo: "/placeholder.svg?height=60&width=150&text=NatWest",
+    logo: "/nwg.png?height=60&width=150&text=NatWest",
   },
   {
     name: "HSBC",
-    logo: "/placeholder.svg?height=60&width=150&text=HSBC",
-  },
+    logo: "/hsbc-logo.svg?height=60&width=150&text=HSBC",
+  },  
   {
-    name: "JP Morgan",
-    logo: "/placeholder.svg?height=60&width=150&text=JPMorgan",
-  },
+    name: "Nationwide",
+    logo: "/nationwide-logo.svg?height=60&width=150&text=Nationwide",
+  }  
 ]
 
 export function ClientsLogos() {

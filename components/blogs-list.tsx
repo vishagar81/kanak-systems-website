@@ -39,7 +39,7 @@ const blogs = [
     author: "Vishal Agarwal",
     date: "Jun 25, 2025",
     readTime: "8 min read",
-    image: "/animation.gif?height=400&width=600",    
+    image: "/animation.gif?height=400&width=600",
     link: "https://medium.com/p/a1cc2835230a",
     featured: true,
   },
@@ -51,8 +51,9 @@ const blogs = [
     author: "Vishal Agarwal",
     date: "Jul 23, 2025",
     readTime: "8 min read",
-    image: "/agentic-asylum-flow.png?height=400&width=600",    
-    link: "https://medium.com/p/3b1831e37e1c",
+    image: "/agentic-asylum-flow.png?height=400&width=600",
+    // link: "https://medium.com/p/3b1831e37e1c",
+    link: "/blogs/4",
     featured: true,
   },
   {
@@ -111,7 +112,7 @@ export function BlogsList(props: { blogTitle: string }) {
   const filterBlogsBySearch = (blog: Blog, searchTerm: string) => {
     const search = searchTerm.toLowerCase().trim();
     if (!search) return true;
-    
+
     return [blog.title, blog.excerpt, blog.category]
       .map(str => str.toLowerCase())
       .some(str => str.includes(search));
@@ -122,10 +123,10 @@ export function BlogsList(props: { blogTitle: string }) {
 
   // Separate featured and regular blogs
   const featuredBlogs = filteredBlogs.filter(blog => blog.featured)
-                        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   const regularBlogs = filteredBlogs.filter(blog => !blog.featured)
-                        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
     <section className="py-16 bg-white">
@@ -137,10 +138,10 @@ export function BlogsList(props: { blogTitle: string }) {
             {featuredBlogs.map((blog) => (
               <Card key={blog.id} className="overflow-hidden border-purple-100 hover:shadow-lg transition-shadow">
                 <div className="relative h-64">
-                  <Link href={`${blog.link}`}>
+                  <Link href={`${blog.link}`} target="_blank" rel="noopener noreferrer">
                     <Image src={blog.image || "/placeholder.svg"} alt={blog.title} fill className="object-cover" />
                     <Badge className="absolute top-4 left-4 bg-purple-600 hover:bg-purple-700">{blog.category}</Badge>
-                  </Link>                  
+                  </Link>
                 </div>
                 <CardContent className="pt-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-3 hover:text-purple-600 transition-colors">

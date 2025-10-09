@@ -9,7 +9,7 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="text-xl font-bold">Kanak Systems Ltd</h3>
             <p className="text-gray-400 text-sm">
-              Led by AWS Certified professionals with 21+ years of enterprise experience. Transforming businesses
+              Led by Technically Certified professionals with 21+ years of enterprise experience. Transforming businesses
               through innovative cloud solutions, AI implementation, and digital modernization.
             </p>
             <div className="flex space-x-4">
@@ -37,27 +37,27 @@ export function Footer() {
             <h4 className="font-semibold">Services</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a href="/#services" className="hover:text-white transition-colors">
                   Cloud Migration
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a href="/#services" className="hover:text-white transition-colors">
                   App Modernization
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a href="/#services" className="hover:text-white transition-colors">
                   AI Solutions
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a href="/#services" className="hover:text-white transition-colors">
                   Automated Testing
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a href="/#services" className="hover:text-white transition-colors">
                   Project Management
                 </a>
               </li>
@@ -84,13 +84,13 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a href="/case-studies" className="hover:text-white transition-colors">
                   Case Studies
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Blog
+                <a href="/blogs" className="hover:text-white transition-colors">
+                  Blogs
                 </a>
               </li>
             </ul>
