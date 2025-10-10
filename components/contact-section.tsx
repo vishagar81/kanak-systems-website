@@ -1,17 +1,142 @@
 "use client"
 
+import type React from "react"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react"
-import { useActionState } from "react"
-import { submitContactForm, type ContactFormState } from "@/app/actions/contact"
+import { useState, useEffect } from "react"
+import { sendEmail, initEmailJS } from "@/lib/emailjs"
 
-const initialState: ContactFormState = {}
+interface FormData {
+  firstName: string
+  lastName: string
+  email: string
+  company: string
+  message: string
+}
+
+interface FormErrors {
+  firstName?: string
+  lastName?: string
+  email?: string
+  company?: string
+  message?: string
+}
 
 export function ContactSection() {
-  const [state, formAction, isPending] = useActionState(submitContactForm, initialState)
+  const [formData, setFormData] = useState<FormData>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    company: "",
+    message: "",
+  })
+
+  const [errors, setErrors] = useState<FormErrors>({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null
+    message: string
+  }>({
+    type: null,
+    message: "",
+  })
+
+  // Initialize EmailJS on component mount
+  useEffect(() => {
+    initEmailJS()
+  }, [])
+
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {}
+
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = "First name is required"
+    }
+
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = "Last name is required"
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required"
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address"
+    }
+
+    if (!formData.company.trim()) {
+      newErrors.company = "Company name is required"
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required"
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = "Message must be at least 10 characters long"
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+
+    // Clear error for this field when user starts typing
+    if (errors[name as keyof FormErrors]) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: undefined,
+      }))
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    // Reset submit status
+    setSubmitStatus({ type: null, message: "" })
+
+    // Validate form
+    if (!validateForm()) {
+      return
+    }
+
+    setIsSubmitting(true)
+
+    try {
+      await sendEmail(formData)
+
+      setSubmitStatus({
+        type: "success",
+        message: "Thank you for your message! We will get back to you within 24 hours.",
+      })
+
+      // Reset form
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        company: "",
+        message: "",
+      })
+    } catch (error) {
+      console.error("Form submission error:", error)
+      setSubmitStatus({
+        type: "error",
+        message:
+          "Sorry, there was an error sending your message. Please try again or contact us directly at tiruvishal@gmail.com.",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   return (
     <section id="contact" className="py-20 bg-white">
@@ -32,24 +157,24 @@ export function ContactSection() {
             </CardHeader>
             <CardContent className="space-y-6">
               {/* Success/Error Messages */}
-              {state.message && (
+              {submitStatus.type && (
                 <div
                   className={`p-4 rounded-lg flex items-center space-x-2 ${
-                    state.success
+                    submitStatus.type === "success"
                       ? "bg-green-50 text-green-800 border border-green-200"
                       : "bg-red-50 text-red-800 border border-red-200"
                   }`}
                 >
-                  {state.success ? (
+                  {submitStatus.type === "success" ? (
                     <CheckCircle className="h-5 w-5 flex-shrink-0" />
                   ) : (
                     <AlertCircle className="h-5 w-5 flex-shrink-0" />
                   )}
-                  <span className="text-sm">{state.message}</span>
+                  <span className="text-sm">{submitStatus.message}</span>
                 </div>
               )}
 
-              <form action={formAction} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
@@ -58,13 +183,13 @@ export function ContactSection() {
                     <Input
                       id="firstName"
                       name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
                       placeholder="John"
                       className="border-purple-200 focus:border-purple-500"
-                      required
+                      disabled={isSubmitting}
                     />
-                    {state.errors?.firstName && (
-                      <p className="text-red-600 text-xs mt-1">{state.errors.firstName[0]}</p>
-                    )}
+                    {errors.firstName && <p className="text-red-600 text-xs mt-1">{errors.firstName}</p>}
                   </div>
                   <div>
                     <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
@@ -73,11 +198,13 @@ export function ContactSection() {
                     <Input
                       id="lastName"
                       name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
                       placeholder="Doe"
                       className="border-purple-200 focus:border-purple-500"
-                      required
+                      disabled={isSubmitting}
                     />
-                    {state.errors?.lastName && <p className="text-red-600 text-xs mt-1">{state.errors.lastName[0]}</p>}
+                    {errors.lastName && <p className="text-red-600 text-xs mt-1">{errors.lastName}</p>}
                   </div>
                 </div>
 
@@ -89,11 +216,13 @@ export function ContactSection() {
                     id="email"
                     name="email"
                     type="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     placeholder="john@company.com"
                     className="border-purple-200 focus:border-purple-500"
-                    required
+                    disabled={isSubmitting}
                   />
-                  {state.errors?.email && <p className="text-red-600 text-xs mt-1">{state.errors.email[0]}</p>}
+                  {errors.email && <p className="text-red-600 text-xs mt-1">{errors.email}</p>}
                 </div>
 
                 <div>
@@ -103,11 +232,13 @@ export function ContactSection() {
                   <Input
                     id="company"
                     name="company"
+                    value={formData.company}
+                    onChange={handleInputChange}
                     placeholder="Your Company"
                     className="border-purple-200 focus:border-purple-500"
-                    required
+                    disabled={isSubmitting}
                   />
-                  {state.errors?.company && <p className="text-red-600 text-xs mt-1">{state.errors.company[0]}</p>}
+                  {errors.company && <p className="text-red-600 text-xs mt-1">{errors.company}</p>}
                 </div>
 
                 <div>
@@ -117,20 +248,22 @@ export function ContactSection() {
                   <Textarea
                     id="message"
                     name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
                     placeholder="Tell us about your project requirements, timeline, and how we can help you..."
                     rows={4}
                     className="border-purple-200 focus:border-purple-500"
-                    required
+                    disabled={isSubmitting}
                   />
-                  {state.errors?.message && <p className="text-red-600 text-xs mt-1">{state.errors.message[0]}</p>}
+                  {errors.message && <p className="text-red-600 text-xs mt-1">{errors.message}</p>}
                 </div>
 
                 <Button
                   type="submit"
-                  disabled={isPending}
+                  disabled={isSubmitting}
                   className="w-full bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white disabled:opacity-50"
                 >
-                  {isPending ? (
+                  {isSubmitting ? (
                     <>
                       <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
                       Sending...
@@ -163,29 +296,32 @@ export function ContactSection() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Email Us</h4>
-                  <p className="text-gray-600">kanaksystemsltd@gmail.com</p>
+                  <p className="text-gray-600">tiruvishal@gmail.com</p>
+                  <p className="text-gray-600">info@kanaksystems.com</p>
                 </div>
               </div>
 
-              {/* <div className="flex items-start space-x-4">
+              <div className="flex items-start space-x-4">
                 <div className="p-3 bg-gradient-to-br from-purple-100 to-violet-100 rounded-lg">
                   <Phone className="h-6 w-6 text-purple-600" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Call Us</h4>
                   <p className="text-gray-600">+44 7955877527</p>
+                  <p className="text-gray-600">+44 (0) 1296 123456</p>
                 </div>
-              </div> */}
+              </div>
 
-              {/* <div className="flex items-start space-x-4">
+              <div className="flex items-start space-x-4">
                 <div className="p-3 bg-gradient-to-br from-purple-100 to-violet-100 rounded-lg">
                   <MapPin className="h-6 w-6 text-purple-600" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Visit Us</h4>
+                  <p className="text-gray-600">Aylesbury Business Park</p>
                   <p className="text-gray-600">Aylesbury, HP22 7FS, UK</p>
                 </div>
-              </div> */}
+              </div>
             </div>
 
             <div className="bg-gradient-to-br from-purple-50 to-violet-50 p-6 rounded-lg border border-purple-100">
