@@ -10,6 +10,7 @@ export const blogs = [
     image: "/remediate-tech-debt.png?height=400&width=600",
     link: "https://www.linkedin.com/pulse/remediate-technical-debt-genai-vishal-agarwal-jekze/",
     featured: true,
+    showTableOfContents: false,
   },
   {
     id: 2,
@@ -22,6 +23,7 @@ export const blogs = [
     image: "/rag-flow.png?height=400&width=600",
     link: "https://medium.com/p/a46d1f257079",
     featured: true,
+    showTableOfContents: false,
   },
   {
     id: 3,
@@ -36,6 +38,7 @@ export const blogs = [
     // link: "https://medium.com/p/a1cc2835230a",
     link: "/blogs/3",
     featured: true,
+    showTableOfContents: true,
   },
   {
     id: 4,
@@ -50,6 +53,7 @@ export const blogs = [
     // link: "https://medium.com/p/3b1831e37e1c",
     link: "/blogs/4",
     featured: true,
+    showTableOfContents: false,
   },
   {
     id: 5,
@@ -61,6 +65,7 @@ export const blogs = [
     readTime: "10 min read",
     image: "/placeholder.svg?height=400&width=600",
     featured: false,
+    showTableOfContents: false,
   },
   {
     id: 6,
@@ -72,6 +77,7 @@ export const blogs = [
     readTime: "7 min read",
     image: "/placeholder.svg?height=400&width=600",
     featured: false,
+    showTableOfContents: false,
   },
   {
     id: 7,
@@ -83,6 +89,7 @@ export const blogs = [
     readTime: "9 min read",
     image: "/placeholder.svg?height=400&width=600",
     featured: false,
+    showTableOfContents: false,
   },
   {
     id: 8,
@@ -94,5 +101,6 @@ export const blogs = [
     readTime: "11 min read",
     image: "/placeholder.svg?height=400&width=600",
     featured: false,
+    showTableOfContents: false,
   },
 ]

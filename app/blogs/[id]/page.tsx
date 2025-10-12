@@ -37,6 +37,7 @@ const getBlogPost = async (id: number | string) => {
     category: "General",
     image: "/placeholder.svg?height=400&width=800",
     featured: false,
+    showTableOfContents: false,
   }
 }
 
@@ -90,7 +91,7 @@ export default async function BlogPost({ params }: { params: { id: string } }) {
         <section className="py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <article className="prose prose-lg max-w-none">
-              <MarkdownRenderer content={post.content} />
+              <MarkdownRenderer content={post.content} showTableOfContents={post.showTableOfContents}/>
             </article>
           </div>
         </section>

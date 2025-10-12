@@ -3,24 +3,6 @@
 
 Architecting sophisticated AI systems where specialized agents collaborate to solve complex problems through intelligent orchestration
 
-Contents
-
-1. [Introduction](#8559)
-
-1. [Core Architecture Principles](#50f5)
-
-1. [System Architecture](#d8fc)
-
-1. [Orchestrator](#ccc3)
-
-1. [Basic Agent](#04df)
-
-1. [Tools in Action](#8af2)
-
-1. [Getting Started](#2ca1)
-
-1. [Conclusion](#e1c8)
-
 ### Introduction
 
 The artificial intelligence landscape is experiencing a paradigm shift. While monolithic AI models dominated the early adoption phase, the future belongs to collaborative multi-agent systems where specialized AI agents work in concert to tackle complex, multi-faceted problems. Today, I'll demonstrate how to architect and implement a production-ready multi-agent system using Node.js that showcases the power of intelligent AI orchestration.
@@ -413,7 +395,7 @@ The orchestrator coordinates multiple agents:
     }
 ```    
 
-## **Getting Started**
+## Getting Started
 
 To run this system locally:
 
@@ -428,7 +410,7 @@ To run this system locally:
     # Run the system
     npm start
 
-## **Real-World Applications**
+## Real-World Applications
 
 This architecture pattern is applicable to various domains:
 
@@ -442,7 +424,7 @@ This architecture pattern is applicable to various domains:
 
 5. **E-commerce**: Handle product, inventory, and shipping queries
 
-## **Future Enhancements**
+## Future Enhancements
 
 Several exciting possibilities for extending this system:
 
@@ -456,7 +438,7 @@ Several exciting possibilities for extending this system:
 
 5. Advanced Memory: Implement long-term memory with vector databases
 
-## **Conclusion**
+## Conclusion
 
 Building a multi-agent system demonstrates the power of modular AI architecture. By breaking complex problems into specialized components, we create systems that are:
 

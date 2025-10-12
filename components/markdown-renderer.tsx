@@ -1,166 +1,128 @@
 "use client"
 
-import type { ReactNode } from "react"
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from "remark-gfm";
-import Image from "next/image";
+import { useState, useEffect } from "react"
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism"
+import Image from "next/image"
 import type { Components } from "react-markdown"
+import { BookOpen, ChevronRight } from "lucide-react"
 
 interface MarkdownRendererProps {
   content: string
+  showTableOfContents?: boolean
 }
 
-// export function MarkdownRenderer({ content }: MarkdownRendererProps) {
-//   // Simple markdown parser for basic formatting
-//   const parseMarkdown = (text: string): ReactNode[] => {
-//     const lines = text.split("\n")
-//     const elements: ReactNode[] = []
-//     let currentIndex = 0
+interface TOCItem {
+  id: string
+  title: string
+  level: number
+}
 
-//     for (let i = 0; i < lines.length; i++) {
-//       const line = lines[i]
+export function MarkdownRenderer({ content, showTableOfContents = true }: MarkdownRendererProps) {
+  const [tocItems, setTocItems] = useState<TOCItem[]>([])
+  const [activeId, setActiveId] = useState<string>("")
 
-//       // Skip empty lines
-//       if (!line.trim()) {
-//         elements.push(<br key={currentIndex++} />)
-//         continue
-//       }
+  // Generate slug from heading text
+  const generateSlug = (text: string): string => {
+    return text
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "")
+  }
 
-//       // Headers
-//       if (line.startsWith("# ")) {
-//         elements.push(
-//           <h1 key={currentIndex++} className="text-4xl font-bold text-gray-900 mb-6 mt-8">
-//             {line.substring(2)}
-//           </h1>,
-//         )
-//       } else if (line.startsWith("## ")) {
-//         elements.push(
-//           <h2 key={currentIndex++} className="text-3xl font-bold text-gray-900 mb-4 mt-8">
-//             {line.substring(3)}
-//           </h2>,
-//         )
-//       } else if (line.startsWith("### ")) {
-//         elements.push(
-//           <h3 key={currentIndex++} className="text-2xl font-bold text-gray-900 mb-3 mt-6">
-//             {line.substring(4)}
-//           </h3>,
-//         )
-//       }
-//       // Bold text with **
-//       else if (line.includes("**")) {
-//         const parts = line.split("**")
-//         const formattedParts = parts.map((part, index) =>
-//           index % 2 === 1 ? (
-//             <strong key={index} className="font-bold">
-//               {part}
-//             </strong>
-//           ) : (
-//             part
-//           ),
-//         )
-//         elements.push(
-//           <p key={currentIndex++} className="text-gray-700 mb-4 leading-relaxed">
-//             {formattedParts}
-//           </p>,
-//         )
-//       }
-//       // Lists
-//       else if (line.startsWith("* ")) {
-//         // Look ahead to collect all list items
-//         const listItems = []
-//         let j = i
-//         while (j < lines.length && lines[j].startsWith("* ")) {
-//           listItems.push(lines[j].substring(2))
-//           j++
-//         }
-//         elements.push(
-//           <ul key={currentIndex++} className="list-disc list-inside mb-4 space-y-2">
-//             {listItems.map((item, index) => (
-//               <li key={index} className="text-gray-700 ml-4">
-//                 {item}
-//               </li>
-//             ))}
-//           </ul>,
-//         )
-//         i = j - 1 // Skip processed lines
-//       }
-//       // Images
-//       else if (line.startsWith("![")) {
-//         const pattern = /!\[([^\]]*)\]\(([^)]+)\)(?:\*([^*]+)\*)?/;  
-//         const match = line.match(pattern);
-//         console.log('line:', line);
-//         if (match) {
-//           const bracketText_alt = match[1]; // Text inside brackets
-//           const url_src = match[2];
-//           const captionText = match[3]; // Text after the image URL
-//           console.log('Image details:', { bracketText_alt, url_src, captionText });
+  // Extract TOC items from content
+  useEffect(() => {
+    const headingRegex = /^(#{1,3})\s+(.+)$/gm
+    const items: TOCItem[] = []
+    let match
 
-//           elements.push(
-//             <div key={currentIndex++} className="my-8">
-//               <img
-//                 src={url_src || "/placeholder.svg?height=400&width=800&text=Image"}
-//                 alt={bracketText_alt}
-//                 className="w-full max-w-4xl mx-auto rounded-lg shadow-lg"
-//                 title={captionText || ''}
-//               />
-//               {bracketText_alt && <p className="text-center text-sm text-gray-500 mt-2 italic">{bracketText_alt}</p>}
-//             </div>,
-//           )
-//         } 
-//       }
-//       // Links
-//       else if (line.includes("[") && line.includes("](")) {
-//         const linkRegex = /\[([^\]]+)\]$$([^)]+)$$/g
-//         let processedLine = line
-//         const matches = [...line.matchAll(linkRegex)]
+    while ((match = headingRegex.exec(content)) !== null) {
+      const level = match[1].length
+      const title = match[2].trim()
+      const id = generateSlug(title)
 
-//         matches.forEach((match) => {
-//           const [fullMatch, text, url] = match
-//           const linkElement = `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-purple-600 hover:text-purple-700 underline">${text}</a>`
-//           processedLine = processedLine.replace(fullMatch, linkElement)
-//         })
+      items.push({ id, title, level })
+    }
 
-//         elements.push(
-//           <p
-//             key={currentIndex++}
-//             className="text-gray-700 mb-4 leading-relaxed"
-//             dangerouslySetInnerHTML={{ __html: processedLine }}
-//           />,
-//         )
-//       }
-//       // Regular paragraphs
-//       else {
-//         elements.push(
-//           <p key={currentIndex++} className="text-gray-700 mb-4 leading-relaxed">
-//             {line}
-//           </p>,
-//         )
-//       }
-//     }
+    setTocItems(items)
+  }, [content])
 
-//     return elements
-//   }
+  // Track active section on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const headings = document.querySelectorAll("h1[id], h2[id], h3[id]")
+      let currentActiveId = ""
 
-//   return <div className="prose prose-lg max-w-none">{parseMarkdown(content)}</div>
-// }
+      headings.forEach((heading) => {
+        const rect = heading.getBoundingClientRect()
+        if (rect.top <= 100 && rect.top >= -100) {
+          currentActiveId = heading.id
+        }
+      })
 
+      if (currentActiveId) {
+        setActiveId(currentActiveId)
+      }
+    }
 
-export function MarkdownRenderer({ content }: MarkdownRendererProps) {
+    window.addEventListener("scroll", handleScroll)
+    handleScroll() // Initial check
+
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  // Scroll to section
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id)
+    if (element) {
+      const offset = 100
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - offset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      })
+    }
+  }
+
   const components: Components = {
-    // Headings
-    h1: ({ children }) => (
-      <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 mt-12 pb-4 border-b border-gray-200">
-        {children}
-      </h1>
-    ),
-    h2: ({ children }) => (
-      <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6 mt-10 pb-3 border-b border-gray-200">
-        {children}
-      </h2>
-    ),
-    h3: ({ children }) => <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4 mt-8">{children}</h3>,
+    // Headings with IDs for TOC
+    h1: ({ children }) => {
+      const text = String(children)
+      const id = generateSlug(text)
+      return (
+        <h1
+          id={id}
+          className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 mt-12 pb-4 border-b border-gray-200 scroll-mt-24"
+        >
+          {children}
+        </h1>
+      )
+    },
+    h2: ({ children }) => {
+      const text = String(children)
+      const id = generateSlug(text)
+      return (
+        <h2
+          id={id}
+          className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6 mt-10 pb-3 border-b border-gray-200 scroll-mt-24"
+        >
+          {children}
+        </h2>
+      )
+    },
+    h3: ({ children }) => {
+      const text = String(children)
+      const id = generateSlug(text)
+      return (
+        <h3 id={id} className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4 mt-8 scroll-mt-24">
+          {children}
+        </h3>
+      )
+    },
     h4: ({ children }) => <h4 className="text-xl lg:text-2xl font-semibold text-gray-900 mb-3 mt-6">{children}</h4>,
     h5: ({ children }) => <h5 className="text-lg lg:text-xl font-semibold text-gray-900 mb-2 mt-4">{children}</h5>,
     h6: ({ children }) => <h6 className="text-base lg:text-lg font-semibold text-gray-900 mb-2 mt-4">{children}</h6>,
@@ -239,7 +201,7 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
         <div className="my-8">
           <div className="relative w-full max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl border border-gray-200">
             <Image
-              src={typeof src === 'string' ? src : "/placeholder.svg"}
+              src={(typeof src === 'string' ? src : "/placeholder.svg")}
               alt={alt || "Blog image"}
               width={1200}
               height={600}
@@ -293,10 +255,82 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
   }
 
   return (
-    <article className="prose prose-lg max-w-none">
-      <ReactMarkdown components={components} remarkPlugins={[remarkGfm]}>
-        {content}
-      </ReactMarkdown>
-    </article>
+    <div className="relative">
+      {/* Table of Contents - Desktop */}
+      {showTableOfContents && tocItems.length > 0 && (
+        <div className="hidden xl:block fixed left-8 top-32 w-64 max-h-[calc(100vh-200px)] overflow-y-auto">
+          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 sticky top-32">
+            <div className="flex items-center space-x-2 mb-4 pb-3 border-b border-gray-200">
+              <BookOpen className="h-5 w-5 text-purple-600" />
+              <h3 className="font-semibold text-gray-900">Table of Contents</h3>
+            </div>
+            <nav className="space-y-1">
+              {tocItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`
+                    w-full text-left px-3 py-2 rounded-lg transition-all duration-200 text-sm
+                    ${item.level === 1 ? "font-semibold" : "font-normal"}
+                    ${item.level === 2 ? "pl-6" : ""}
+                    ${item.level === 3 ? "pl-9" : ""}
+                    ${
+                      activeId === item.id
+                        ? "bg-purple-50 text-purple-700 border-l-2 border-purple-600"
+                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                    }
+                  `}
+                >
+                  <div className="flex items-center space-x-2">
+                    {activeId === item.id && <ChevronRight className="h-3 w-3 flex-shrink-0" />}
+                    <span className="truncate">{item.title}</span>
+                  </div>
+                </button>
+              ))}
+            </nav>
+          </div>
+        </div>
+      )}
+
+      {/* Table of Contents - Mobile/Tablet */}
+      {showTableOfContents && tocItems.length > 0 && (
+        <div className="xl:hidden mb-8">
+          <details className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+            <summary className="flex items-center space-x-2 cursor-pointer font-semibold text-gray-900">
+              <BookOpen className="h-5 w-5 text-purple-600" />
+              <span>Table of Contents</span>
+            </summary>
+            <nav className="mt-4 space-y-1">
+              {tocItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`
+                    w-full text-left px-3 py-2 rounded-lg transition-all duration-200 text-sm
+                    ${item.level === 1 ? "font-semibold" : "font-normal"}
+                    ${item.level === 2 ? "pl-6" : ""}
+                    ${item.level === 3 ? "pl-9" : ""}
+                    ${
+                      activeId === item.id
+                        ? "bg-purple-50 text-purple-700"
+                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                    }
+                  `}
+                >
+                  {item.title}
+                </button>
+              ))}
+            </nav>
+          </details>
+        </div>
+      )}
+
+      {/* Markdown Content */}
+      <article className="prose prose-lg max-w-none">
+        <ReactMarkdown components={components} remarkPlugins={[remarkGfm]}>
+          {content}
+        </ReactMarkdown>
+      </article>
+    </div>
   )
 }
