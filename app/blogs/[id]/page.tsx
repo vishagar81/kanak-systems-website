@@ -8,44 +8,20 @@ import Link from "next/link"
 import { ClientsTicker } from "@/components/clients-ticker"
 import fs from "fs"
 import path from "path"
+import { blogs } from "@/lib/data/blogs"
 
-// This would typically come from a CMS or database
-const getBlogPost = async (id: string) => {
-  if (id === "4") {
+const getBlogPost = async (id: number | string) => {
+  // from blogs list find the blog matching provided id
+  // If the matching blog has a content key then read the markdown file and return the content from content\blogs folder  
+
+  const blog = blogs.find((b) => b.id === Number(id));
+  if (blog && blog.content) {
     try {
-      // Read the asylum-flow markdown file
-      const filePath = path.join(process.cwd(), "content", "blogs", "asylum-flow.md")
+      const filePath = path.join(process.cwd(), "content", "blogs", blog.content)
       const fileContent = fs.readFileSync(filePath, "utf8")
-
-      return {
-        id: "4",
-        title:
-          "Agentic Workflow for Asylum Claims Processing: How Multi-Agent AI could Transform Government Decision-Making",
-        excerpt:
-          "A deep dive into an innovative system that combines advanced document processing, legal reasoning, and human-centred design",
-        content: fileContent,
-        author: "Vishal Agarwal",
-        date: "June 5, 2025",
-        readTime: "15 min read",
-        category: "AI & ML",
-        image: "/placeholder.svg?height=400&width=800&text=AI+Workflow+System",
-        featured: true,
-      }
+      return { ...blog, content: fileContent }
     } catch (error) {
-      console.error("Error reading asylum-flow.md:", error)
-      // Fallback content if file can't be read
-      return {
-        id: "4",
-        title: "Blog Post Loading Error",
-        excerpt: "There was an error loading the blog post content.",
-        content: "# Error Loading Content\n\nSorry, there was an error loading this blog post. Please try again later.",
-        author: "Vishal Agarwal",
-        date: "June 5, 2024",
-        readTime: "15 min read",
-        category: "AI & ML",
-        image: "/placeholder.svg?height=400&width=800",
-        featured: true,
-      }
+      return { ...blog, content: "# Error Loading Content\n\nSorry, there was an error loading this blog post. Please try again later." }
     }
   }
 
@@ -67,7 +43,6 @@ const getBlogPost = async (id: string) => {
 export default async function BlogPost({ params }: { params: { id: string } }) {
   const { id } = await params;
   const post = await getBlogPost(id);
-
   return (
     <div className="min-h-screen bg-white">
       <Header />
