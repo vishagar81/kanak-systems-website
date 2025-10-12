@@ -43,13 +43,13 @@ export function BlogsHero(props: { parentCallback: (event: any) => void }) {
           </div>
           
           {/* Categories */}
-          <div className="mt-8 flex flex-wrap justify-center gap-2">
+          {/* <div className="mt-8 flex flex-wrap justify-center gap-2">
             {["All", "Cloud Migration", "AI & ML", "Modernization", "DevOps", "Case Studies"].map((category) => (
               <Button key={category} variant="outline" className="border-purple-200 text-purple-700 hover:bg-purple-50">
                 {category}
               </Button>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

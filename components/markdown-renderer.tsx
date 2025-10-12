@@ -127,8 +127,19 @@ export function MarkdownRenderer({ content, showTableOfContents = true }: Markdo
     h5: ({ children }) => <h5 className="text-lg lg:text-xl font-semibold text-gray-900 mb-2 mt-4">{children}</h5>,
     h6: ({ children }) => <h6 className="text-base lg:text-lg font-semibold text-gray-900 mb-2 mt-4">{children}</h6>,
 
-    // Paragraphs
-    p: ({ children }) => <p className="text-gray-700 leading-relaxed mb-6 text-base lg:text-lg">{children}</p>,
+    // Paragraphs - use div to avoid nesting issues
+    p: ({ children, node }) => {
+      // Check if paragraph contains only an image
+      const hasOnlyImage =
+        node?.children?.length === 1 && node.children[0].type === "element" && node.children[0].tagName === "img"
+
+      // If it's just an image, render children directly to avoid p > div nesting
+      if (hasOnlyImage) {
+        return <>{children}</>
+      }
+
+      return <p className="text-gray-700 leading-relaxed mb-6 text-base lg:text-lg">{children}</p>
+    },
 
     // Links
     a: ({ href, children }) => (
@@ -193,26 +204,31 @@ export function MarkdownRenderer({ content, showTableOfContents = true }: Markdo
       )
     },
 
-    // Images
+    // Images - fixed to avoid nesting issues
     img: ({ src, alt }) => {
       if (!src) return null
 
+      // Handle blob URLs or use placeholder
+      const imageSrc = typeof src === 'string' ? src : "/placeholder.svg"
+
       return (
-        <div className="my-8">
-          <div className="relative w-full max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl border border-gray-200">
+        <span className="block my-8">
+          <span className="block relative w-full max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl border border-gray-200">
             <Image
-              src={(typeof src === 'string' ? src : "/placeholder.svg")}
+              src={imageSrc}
               alt={alt || "Blog image"}
               width={1200}
               height={600}
               className="w-full h-auto"
               unoptimized
             />
-          </div>
+          </span>
           {alt && (
-            <p className="text-center text-sm text-gray-500 mt-4 italic max-w-4xl mx-auto leading-relaxed">{alt}</p>
+            <span className="block text-center text-sm text-gray-500 mt-4 italic max-w-4xl mx-auto leading-relaxed">
+              {alt}
+            </span>
           )}
-        </div>
+        </span>
       )
     },
 
