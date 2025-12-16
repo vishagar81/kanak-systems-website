@@ -57,6 +57,21 @@ export const blogs = [
   },
   {
     id: 5,
+    title: "AI Chatbot for realtime stock information",
+    excerpt: "Practical guide to Model context protocol for AI chatbot conversations.",
+    category: "Agentic AI",
+    author: "Vishal Agarwal",
+    date: "Nov 07, 2025",
+    readTime: "8 min read",
+    image: "/ai-chatbot.png?height=400&width=600",
+    content: "stocks-ai-chatbot.md",
+    // link: "https://medium.com/p/a1cc2835230a",
+    link: "/blogs/5",
+    featured: true,
+    showTableOfContents: true,
+  },
+  {
+    id: 6,
     title: "Microservices vs. Monoliths: Making the Right Choice",
     excerpt: "A comprehensive comparison to help you decide the best architecture for your application.",
     category: "Modernization",
@@ -68,7 +83,7 @@ export const blogs = [
     showTableOfContents: false,
   },
   {
-    id: 6,
+    id: 7,
     title: "Serverless Architecture: Reducing Cloud Costs by 20%",
     excerpt: "How we helped a financial services client reduce their cloud expenditure through serverless adoption.",
     category: "Cloud Migration",
@@ -80,7 +95,7 @@ export const blogs = [
     showTableOfContents: false,
   },
   {
-    id: 7,
+    id: 8,
     title: "RAG Implementation for Enterprise Knowledge Bases",
     excerpt: "Leveraging Retrieval Augmented Generation to enhance enterprise search and knowledge management.",
     category: "AI & ML",
@@ -92,7 +107,7 @@ export const blogs = [
     showTableOfContents: false,
   },
   {
-    id: 8,
+    id: 9,
     title: "DevOps Best Practices for Regulated Industries",
     excerpt: "Implementing CI/CD pipelines while maintaining compliance in highly regulated sectors.",
     category: "DevOps",
