@@ -78,7 +78,7 @@ export const blogs = [
     author: "Vishal Agarwal",
     date: "Jan 29, 2026",
     readTime: "10 min read",
-    image: "/ai-transport/tfl-chatbot-splash.png?height=400&width=600",
+    image: "/ai-transport/tfl-chatbot-geo-fencing.png?height=400&width=600",
     content: "ai-transport.md",
     link: "/blogs/6",
     featured: true,
