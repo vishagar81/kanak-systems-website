@@ -72,7 +72,7 @@ export const blogs = [
   },
   {
     id: 6,
-    title: "AI Chatbot for Transportation flows",
+    title: "Agentic workflows for Transportation",
     excerpt: "Implementation guide on how can Agentic AI simplify basic to complex transportation flows.",
     category: "Agentic AI",
     author: "Vishal Agarwal",
