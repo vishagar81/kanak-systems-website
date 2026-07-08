@@ -86,6 +86,20 @@ export const blogs = [
   },
   {
     id: 7,
+    title: "Agentic Code Review - Enriching Copilot context for effective review",
+    excerpt: "How to enrich Copilot context for automated and effective Copilot reviews",
+    category: "Copilot",
+    author: "Vishal Agarwal",
+    date: "Jul 07, 2026",
+    readTime: "10 min read",
+    image: "/ado-compliance/ado-compliance-flow.svg?height=400&width=600",
+    content: "copilot-ado-traceability-gate.md",
+    link: "/blogs/7",
+    featured: true,
+    showTableOfContents: true,
+  },
+  {
+    id: 8,
     title: "Microservices vs. Monoliths: Making the Right Choice",
     excerpt: "A comprehensive comparison to help you decide the best architecture for your application.",
     category: "Modernization",
@@ -97,7 +111,7 @@ export const blogs = [
     showTableOfContents: false,
   },
   {
-    id: 8,
+    id: 9,
     title: "Serverless Architecture: Reducing Cloud Costs by 20%",
     excerpt: "How we helped a financial services client reduce their cloud expenditure through serverless adoption.",
     category: "Cloud Migration",
@@ -109,7 +123,7 @@ export const blogs = [
     showTableOfContents: false,
   },
   {
-    id: 9,
+    id: 10,
     title: "RAG Implementation for Enterprise Knowledge Bases",
     excerpt: "Leveraging Retrieval Augmented Generation to enhance enterprise search and knowledge management.",
     category: "AI & ML",
@@ -121,7 +135,7 @@ export const blogs = [
     showTableOfContents: false,
   },
   {
-    id: 10,
+    id: 11,
     title: "DevOps Best Practices for Regulated Industries",
     excerpt: "Implementing CI/CD pipelines while maintaining compliance in highly regulated sectors.",
     category: "DevOps",
