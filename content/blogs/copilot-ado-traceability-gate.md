@@ -37,9 +37,6 @@ The diagram below is not a schematic drawn from imagination — it's assembled f
 
 ![The compliance pipeline end to end, captured from an actual run against AB#4821 — PR open, ADO snapshot injection, Copilot review, and the Gate 2 verdict comment, through to merge and deploy](/ado-compliance/ado-compliance-flow.svg)
 
-
-<img src="/public/ado-compliance/ado-compliance-flow.svg" alt="The compliance pipeline end to end, captured from an actual run against AB#4821 — PR open, ADO snapshot injection, Copilot review, and the Gate 2 verdict comment, through to merge and deploy">
-
 Two design decisions are worth calling out before going step-by-step. First, Gate 1 and Gate 2 are triggered by entirely different GitHub event types (`pull_request` vs. `pull_request_review` / `issue_comment`), so they cannot race each other or run out of order — Gate 2 structurally cannot fire until a review exists to react to. Second, every side-effect that isn't the actual pass/fail decision (the PR comment, the ADO write-back) is wrapped in `if: always()`, while the branch-protection-relevant Check Run and the `exit 1` are the only steps that actually gate anything. That separation of **observability** from **enforcement** is a pattern worth stealing even outside this specific use case.
 
 ## Gate 1 — Requirement Injection: turning an ADO ticket into executable context
