@@ -23,7 +23,7 @@ const stages = [
     description: "Build, integrate and hand over a solution that works in production and can be measured there.",
     outputs: "Build, integration, evaluation, support and handover.",
     art: "stage-art--production",
-    image: "/images/system-network.svg",
+    image: "/images/system-production.svg",
   },
 ]
 
