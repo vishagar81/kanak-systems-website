@@ -1,15 +1,15 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { CaseStudiesHero } from "@/components/case-studies-hero"
-import { CaseStudiesList } from "@/components/case-studies-list"
+import { WorkHero } from "@/components/work-hero"
+import { WorkIndex } from "@/components/work-index"
 
 export default function CaseStudiesPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="page-shell">
       <Header />
       <main>
-        <CaseStudiesHero />
-        <CaseStudiesList />
+        <WorkHero />
+        <WorkIndex />
       </main>
       <Footer />
     </div>

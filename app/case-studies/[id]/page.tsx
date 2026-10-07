@@ -1,12 +1,10 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { ArrowLeft, Building2, Calendar, TrendingUp, Users, CheckCircle, Target, Zap } from "lucide-react"
+import type { Metadata } from "next"
+import { notFound, permanentRedirect } from "next/navigation"
+import { ArrowLeft, ArrowUpRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { ClientsTicker } from "@/components/clients-ticker"
 import { CaseStudyContent } from "@/components/case-study-content"
 
 // This would typically come from a CMS or database
@@ -14,6 +12,7 @@ const getCaseStudy = async (id: string) => {
   const caseStudiesData: Record<string, any> = {
     "1": {
       id: "1",
+      slug: "lseg-ai-programme-transformation",
       title: "London Stock Exchange Group: £5M AI Programme Transformation",
       client: "London Stock Exchange Group",
       industry: "Financial Services",
@@ -88,6 +87,7 @@ const getCaseStudy = async (id: string) => {
     },
     "2": {
       id: "2",
+      slug: "transport-for-london-digital-transformation",
       title: "Transport for London: Large-Scale Digital Transformation",
       client: "Transport for London",
       industry: "Transportation & Government",
@@ -160,6 +160,7 @@ const getCaseStudy = async (id: string) => {
     },
     "3": {
       id: "3",
+      slug: "schroders-serverless-architecture-migration",
       title: "Schroders: Serverless Architecture Migration",
       client: "Schroders Personal Wealth",
       industry: "Wealth Management",
@@ -234,210 +235,110 @@ const getCaseStudy = async (id: string) => {
     },
   }
 
-  return caseStudiesData[id] || null
+  return Object.values(caseStudiesData).find((caseStudy) => caseStudy.slug === id) || caseStudiesData[id] || null
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params
+  const caseStudy = await getCaseStudy(id)
+
+  if (!caseStudy) return { title: "Case study not found | Kanak Systems" }
+
+  const title = `${caseStudy.title} | Kanak Systems`
+  const description = caseStudy.excerpt
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+  const canonicalUrl = siteUrl ? new URL(`/case-studies/${caseStudy.slug}`, siteUrl).toString() : undefined
+  const imagePath = caseStudy.image.split("?")[0]
+  const imageUrl = siteUrl && /\.(png|jpe?g|gif|webp)$/i.test(imagePath)
+    ? new URL(imagePath, siteUrl).toString()
+    : undefined
+
+  return {
+    title,
+    description,
+    ...(canonicalUrl ? { alternates: { canonical: canonicalUrl } } : {}),
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      ...(canonicalUrl ? { url: canonicalUrl } : {}),
+      ...(imageUrl ? { images: [{ url: imageUrl, alt: caseStudy.title }] } : {}),
+    },
+    twitter: {
+      card: imageUrl ? "summary_large_image" : "summary",
+      title,
+      description,
+      ...(imageUrl ? { images: [imageUrl] } : {}),
+    },
+  }
 }
 
 export default async function CaseStudyPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const caseStudy = await getCaseStudy(id)
 
-  if (!caseStudy) {
-    return (
-      <div className="min-h-screen bg-white">
-        <Header />
-        <main className="py-20">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Page under construction</h1>
-            <p className="text-gray-600 mb-8">The requested page is under construction.</p>
-            <Link href="/case-studies">
-              <Button className="bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700">
-                View All Case Studies
-              </Button>
-            </Link>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    )
-  }
+  if (!caseStudy) notFound()
+  if (/^\d+$/.test(id)) permanentRedirect(`/case-studies/${caseStudy.slug}`)
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="page-shell">
       <Header />
-
-      <main>
-        {/* Hero Section */}
-        <section className="bg-gradient-to-br from-gray-50 to-purple-50 py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mb-8">
-              <Link href="/case-studies">
-                <Button variant="ghost" className="text-purple-600 hover:text-purple-700 hover:bg-purple-50 mb-4">
-                  <ArrowLeft className="h-4 w-4 mr-2" />
-                  Back to Case Studies
-                </Button>
-              </Link>
-
-              <div className="flex items-center space-x-3 mb-4">
-                <Badge className="bg-purple-600 hover:bg-purple-700">{caseStudy.industry}</Badge>
-                <span className="text-gray-500">•</span>
-                <div className="flex items-center text-gray-600">
-                  <Building2 className="h-4 w-4 mr-2" />
-                  <span className="font-medium">{caseStudy.client}</span>
-                </div>
-              </div>
-
-              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">{caseStudy.title}</h1>
-
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">{caseStudy.excerpt}</p>
-
-              {/* Quick Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="bg-white rounded-lg p-4 border border-purple-100">
-                  <div className="flex items-center text-purple-600 mb-2">
-                    <Calendar className="h-5 w-5 mr-2" />
-                    <span className="text-sm font-semibold">Duration</span>
-                  </div>
-                  <p className="text-sm text-gray-900">{caseStudy.duration}</p>
-                </div>
-                <div className="bg-white rounded-lg p-4 border border-purple-100">
-                  <div className="flex items-center text-purple-600 mb-2">
-                    <Users className="h-5 w-5 mr-2" />
-                    <span className="text-sm font-semibold">Team Size</span>
-                  </div>
-                  <p className="text-sm text-gray-900">{caseStudy.teamSize}</p>
-                </div>
-                <div className="bg-white rounded-lg p-4 border border-purple-100">
-                  <div className="flex items-center text-purple-600 mb-2">
-                    <TrendingUp className="h-5 w-5 mr-2" />
-                    <span className="text-sm font-semibold">Programme Value</span>
-                  </div>
-                  <p className="text-sm text-gray-900">{caseStudy.programmeValue}</p>
-                </div>
-                <div className="bg-white rounded-lg p-4 border border-purple-100">
-                  <div className="flex items-center text-purple-600 mb-2">
-                    <Target className="h-5 w-5 mr-2" />
-                    <span className="text-sm font-semibold">Status</span>
-                  </div>
-                  <p className="text-sm text-gray-900">Completed</p>
-                </div>
-              </div>
-            </div>
+      <main className="case-detail">
+        <section className="section-wrap case-detail__hero">
+          <Link href="/case-studies" className="text-link case-detail__back"><ArrowLeft className="h-4 w-4" aria-hidden="true" /> Selected work</Link>
+          <p className="eyebrow">{caseStudy.industry} / {caseStudy.client}</p>
+          <h1 className="editorial-title">{caseStudy.title}</h1>
+          <p className="case-detail__summary">{caseStudy.excerpt}</p>
+          <div className="case-detail__outcome">
+            <p className="eyebrow">Reported outcome</p>
+            <strong>{caseStudy.results[0]?.metric}</strong>
+            <p>{caseStudy.results[0]?.description}</p>
           </div>
+          <dl className="case-detail__facts">
+            <div><dt>Engagement</dt><dd>{caseStudy.duration}</dd></div>
+            <div><dt>Team</dt><dd>{caseStudy.teamSize}</dd></div>
+            <div><dt>Programme value</dt><dd>{caseStudy.programmeValue}</dd></div>
+          </dl>
+          <p className="case-detail__caveat">Programme value is not Kanak revenue. Reported results require confirmation of role, baseline, measurement method and client publication permission.</p>
         </section>
 
-        {/* Hero Image */}
-        <section className="py-8 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="relative h-96 rounded-2xl overflow-hidden shadow-xl">
-              <Image src={caseStudy.image || "/placeholder.svg"} alt={caseStudy.title} fill className="object-cover" />
-            </div>
-          </div>
-        </section>
+        <figure className="section-wrap case-detail__visual">
+          <Image src="/images/system-network.svg" alt="" fill sizes="(max-width: 720px) 92vw, 86vw" priority />
+          <figcaption>Illustrative systems artwork, not a representation of a client system or technical specification.</figcaption>
+        </figure>
 
-        {/* Challenge Section */}
-        <section className="py-16">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-100 to-violet-100 rounded-lg flex items-center justify-center mr-4">
-                <Target className="h-6 w-6 text-purple-600" />
-              </div>
-              <h2 className="text-3xl font-bold text-gray-900">The Challenge</h2>
-            </div>
-            <div className="prose prose-lg max-w-none">
-              <p className="text-gray-700 leading-relaxed whitespace-pre-line">{caseStudy.challenge}</p>
-            </div>
-          </div>
-        </section>
-
-        {/* Solution Section */}
-        <section className="py-16 bg-gradient-to-br from-purple-50 to-violet-50">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-100 to-violet-100 rounded-lg flex items-center justify-center mr-4">
-                <Zap className="h-6 w-6 text-purple-600" />
-              </div>
-              <h2 className="text-3xl font-bold text-gray-900">The Solution</h2>
-            </div>
-            <div className="prose prose-lg max-w-none">
-              <p className="text-gray-700 leading-relaxed whitespace-pre-line">{caseStudy.solution}</p>
-            </div>
-          </div>
-        </section>
-
-        {/* Results Section */}
-        <section className="py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center mb-8 justify-center">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-100 to-violet-100 rounded-lg flex items-center justify-center mr-4">
-                <CheckCircle className="h-6 w-6 text-purple-600" />
-              </div>
-              <h2 className="text-3xl font-bold text-gray-900">Results & Impact</h2>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {caseStudy.results.map((result: any, index: number) => (
-                <Card key={index} className="text-center border-purple-100">
-                  <CardContent className="pt-6">
-                    <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent mb-3">
-                      {result.metric}
-                    </div>
-                    <p className="text-gray-600">{result.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Technologies Section */}
-        <section className="py-16 bg-gray-50">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Technologies & Methodologies</h2>
-            <div className="flex flex-wrap justify-center gap-3">
-              {caseStudy.technologies.map((tech: string, index: number) => (
-                <Badge key={index} variant="outline" className="text-sm border-purple-200 text-purple-700 px-4 py-2">
-                  {tech}
-                </Badge>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Testimonial Section */}
-        {caseStudy.testimonial && (
-          <section className="py-16 bg-gradient-to-br from-purple-50 to-violet-50">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-              <Card className="border-purple-100">
-                <CardContent className="p-8">
-                  <div className="text-4xl text-purple-600 mb-4">"</div>
-                  <p className="text-xl text-gray-700 italic mb-6 leading-relaxed">{caseStudy.testimonial.quote}</p>
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 bg-gradient-to-br from-purple-100 to-violet-200 rounded-full flex items-center justify-center mr-4">
-                      <span className="text-lg font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">
-                        {caseStudy.testimonial.author.charAt(0)}
-                      </span>
-                    </div>
-                    <div>
-                      <div className="font-semibold text-gray-900">{caseStudy.testimonial.author}</div>
-                      <div className="text-gray-600 text-sm">{caseStudy.testimonial.role}</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+        <div className="case-detail__body">
+          <section className="case-detail__section">
+            <p className="eyebrow">01 / Context</p>
+            <h2 className="editorial-title">The challenge</h2>
+            <p>{caseStudy.challenge}</p>
           </section>
-        )}
+          <section className="case-detail__section">
+            <p className="eyebrow">02 / Contribution</p>
+            <h2 className="editorial-title">The work</h2>
+            <p>{caseStudy.solution}</p>
+          </section>
+          <section className="case-detail__section">
+            <p className="eyebrow">03 / Evidence</p>
+            <h2 className="editorial-title">Reported results</h2>
+            <dl className="case-detail__results">
+              {caseStudy.results.map((result: { metric: string; description: string }, index: number) => (
+                <div key={`${result.metric}-${index}`}>
+                  <dt>{result.metric}</dt>
+                  <dd>{result.description}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="case-detail__caveat">These results are reported in the existing portfolio and have not been independently verified.</p>
+          </section>
+          <section className="case-detail__section case-detail__technology">
+            <p className="eyebrow">Delivery context</p>
+            <h2 className="editorial-title">Methods and technologies</h2>
+            <ul>{caseStudy.technologies.map((tech: string) => <li key={tech}>{tech}</li>)}</ul>
+          </section>
+        </div>
 
-        {/* CTA Section */}
         <CaseStudyContent />
-
-        {/* Social Proof */}
-        <section className="border-t border-gray-200 pt-16">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-semibold text-gray-900 mb-2">Trusted by Industry Leaders</h3>
-            <p className="text-gray-600">Join the organizations that have transformed with our expertise</p>
-          </div>
-          <ClientsTicker />
-        </section>
       </main>
 
       <Footer />

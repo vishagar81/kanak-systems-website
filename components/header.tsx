@@ -1,8 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { ArrowUpRight, Menu, X } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -10,79 +9,53 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <header className="bg-white shadow-sm border-b sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
+    <header className="site-header" onKeyDown={(event) => event.key === "Escape" && setIsMenuOpen(false)}>
+      <div className="section-wrap">
+        <div className="flex min-h-[82px] justify-between items-center gap-8">
           <div className="flex-shrink-0 flex items-center">
-            <Link href='/'>
+            <Link href="/" aria-label="Kanak Systems home">
               <Image
-                src="/logo-small.png"
+                src="/logo-small.svg"
                 alt="Kanak Systems Ltd"
-                width={300}
-                height={75}
-                className="h-16 w-auto"
+                width={470}
+                height={108}
+                className="site-logo"
                 priority
               />
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
-            <a href="/" className="text-purple-700 hover:rounded-sm hover:bg-purple-700 hover:text-white transition-colors">
-              Home
-            </a>
-            <a href="/#services" className="text-purple-700 hover:rounded-sm hover:bg-purple-700 hover:text-white transition-colors">
-              Services
-            </a>
-            <Link href="/case-studies" className="text-purple-700 hover:rounded-sm hover:bg-purple-700 hover:text-white transition-colors">
-              Case Studies
-            </Link>
-            <a href="/blogs" className="text-purple-700 hover:rounded-sm hover:bg-purple-700 hover:text-white transition-colors">
-              Blogs
-            </a>
-            <a href="/#contact" className="text-purple-700 hover:rounded-sm hover:bg-purple-700 hover:text-white transition-colors">
-              Contact
-            </a>
+          <nav className="site-nav hidden md:flex items-center gap-8" aria-label="Main navigation">
+            <Link href="/case-studies">Work <ArrowUpRight className="ml-1 inline h-3.5 w-3.5" aria-hidden="true" /></Link>
+            <Link href="/#stages">How we work</Link>
+            <Link href="/blogs">Insights</Link>
+            <Link href="/#contact">Contact</Link>
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <Button className="bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white">
-              <Link href='/#contact'>Get Consultation</Link>
-            </Button>
-          </div>
+          <Link className="site-button hidden md:inline-flex" href="/#contact">Discuss a project <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></Link>
 
-          {/* Mobile menu button */}
           <div className="md:hidden">
-            <Button variant="ghost" size="sm" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
+            <button
+              type="button"
+              className="inline-flex h-11 w-11 items-center justify-center border border-[var(--rule)] text-[var(--ink)]"
+              aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-navigation"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
+            </button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t">
-            <nav className="flex flex-col space-y-4">
-              <a href="/" className="text-purple-700 hover:text-purple-600 transition-colors">
-                Home
-              </a>
-              <a href="/#services" className="text-purple-700 hover:text-purple-600 transition-colors">
-                Services
-              </a>
-              <Link href="/case-studies" className="text-purple-700 hover:text-purple-600 transition-colors">
-                Case Studies
-              </Link>
-              <a href="/blogs" className="text-purple-700 hover:text-purple-600 transition-colors">
-                Blogs
-              </a>
-              <a href="/#contact" className="text-purple-700 hover:text-purple-600 transition-colors">
-                Contact
-              </a>
-              <Button className="bg-purple-600 hover:bg-purple-700 w-full">
-                <Link href='/#contact'>Get Consultation</Link>
-              </Button>
+          <div id="mobile-navigation" className="md:hidden border-t border-[var(--rule)] py-5">
+            <nav className="site-nav flex flex-col gap-5" aria-label="Mobile navigation">
+              <Link href="/case-studies" onClick={() => setIsMenuOpen(false)}>Work</Link>
+              <Link href="/#stages" onClick={() => setIsMenuOpen(false)}>How we work</Link>
+              <Link href="/blogs" onClick={() => setIsMenuOpen(false)}>Insights</Link>
+              <Link href="/#contact" onClick={() => setIsMenuOpen(false)}>Contact</Link>
+              <Link className="site-button w-full" href="/#contact" onClick={() => setIsMenuOpen(false)}>Discuss a project <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></Link>
             </nav>
           </div>
         )}

@@ -42,7 +42,7 @@ export function BlogsList(props: { blogTitle: string }) {
             {featuredBlogs.map((blog) => (
               <Card key={blog.id} className="overflow-hidden border-purple-100 hover:shadow-lg transition-shadow">
                 <div className="relative h-64">
-                  <Link href={`${blog.link}`} target="_blank" rel="noopener noreferrer">
+                    <Link href={blog.link || `/blogs/${blog.slug}`} target={blog.link?.startsWith("http") ? "_blank" : undefined} rel={blog.link?.startsWith("http") ? "noreferrer" : undefined}>
                     <Image src={blog.image || "/placeholder.svg"} alt={blog.title} fill className="object-cover" />
                     <Badge className="absolute top-4 left-4 bg-purple-600 hover:bg-purple-700">{blog.category}</Badge>
                   </Link>
@@ -50,9 +50,7 @@ export function BlogsList(props: { blogTitle: string }) {
                 <CardContent className="pt-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-3 hover:text-purple-600 transition-colors">
                     {
-                      blog.link ?
-                        <a href={`${blog.link}`}>{blog.title}</a>
-                        : <a href={`/blogs/${blog.id}`}>{blog.title}</a>
+                      <Link href={blog.link || `/blogs/${blog.slug}`} target={blog.link?.startsWith("http") ? "_blank" : undefined} rel={blog.link?.startsWith("http") ? "noreferrer" : undefined}>{blog.title}</Link>
                     }
                   </h3>
                   <p className="text-gray-600 mb-4">{blog.excerpt}</p>
@@ -73,7 +71,7 @@ export function BlogsList(props: { blogTitle: string }) {
                 </CardContent>
                 <CardFooter className="pt-0">
                   <Button variant="link" className="text-purple-600 hover:text-purple-700 p-0">
-                    <Link href={`${blog.link}`}>Read More </Link> <ArrowRight className="h-4 w-4 ml-1" />
+                    <Link href={blog.link || `/blogs/${blog.slug}`} target={blog.link?.startsWith("http") ? "_blank" : undefined} rel={blog.link?.startsWith("http") ? "noreferrer" : undefined}>Read More </Link> <ArrowRight className="h-4 w-4 ml-1" />
                   </Button>
                 </CardFooter>
               </Card>
@@ -93,7 +91,7 @@ export function BlogsList(props: { blogTitle: string }) {
                 </div>
                 <CardContent className="pt-6">
                   <h3 className="text-lg font-bold text-gray-900 mb-2 hover:text-purple-600 transition-colors">
-                    <a href={`/blogs/${blog.id}`}>{blog.title}</a>
+                    <a href={`/blogs/${blog.slug}`}>{blog.title}</a>
                   </h3>
                   <p className="text-gray-600 text-sm mb-4 line-clamp-2">{blog.excerpt}</p>
                   <div className="flex items-center text-xs text-gray-500 space-x-3">

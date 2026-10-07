@@ -145,8 +145,8 @@ export function MarkdownRenderer({ content, showTableOfContents = true }: Markdo
     a: ({ href, children }) => (
       <a
         href={href}
-        target="_blank"
-        rel="noopener noreferrer"
+        target={href?.startsWith("http") ? "_blank" : undefined}
+        rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
         className="text-purple-600 hover:text-purple-700 underline decoration-purple-300 hover:decoration-purple-500 transition-colors font-medium"
       >
         {children}
@@ -275,7 +275,7 @@ export function MarkdownRenderer({ content, showTableOfContents = true }: Markdo
       {/* Table of Contents - Desktop */}
       {showTableOfContents && tocItems.length > 0 && (
         <div className="hidden xl:block fixed left-8 top-32 w-64 max-h-[calc(100vh-200px)] overflow-y-auto">
-          <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 sticky top-32">
+          <div className="article-toc bg-white rounded-xl shadow-lg border border-gray-200 p-6 sticky top-32">
             <div className="flex items-center space-x-2 mb-4 pb-3 border-b border-gray-200">
               <BookOpen className="h-5 w-5 text-purple-600" />
               <h3 className="font-semibold text-gray-900">Table of Contents</h3>
@@ -310,8 +310,8 @@ export function MarkdownRenderer({ content, showTableOfContents = true }: Markdo
 
       {/* Table of Contents - Mobile/Tablet */}
       {showTableOfContents && tocItems.length > 0 && (
-        <div className="xl:hidden mb-8">
-          <details className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+        <div className="article-toc-mobile xl:hidden mb-8">
+          <details className="article-toc bg-white rounded-xl shadow-lg border border-gray-200 p-6">
             <summary className="flex items-center space-x-2 cursor-pointer font-semibold text-gray-900">
               <BookOpen className="h-5 w-5 text-purple-600" />
               <span>Table of Contents</span>
@@ -342,7 +342,7 @@ export function MarkdownRenderer({ content, showTableOfContents = true }: Markdo
       )}
 
       {/* Markdown Content */}
-      <article className="prose prose-lg max-w-none">
+      <article className="article-body">
         <ReactMarkdown components={components} remarkPlugins={[remarkGfm]}>
           {content}
         </ReactMarkdown>

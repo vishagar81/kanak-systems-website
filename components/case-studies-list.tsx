@@ -9,6 +9,7 @@ import Link from "next/link"
 const caseStudies = [
   {
     id: 1,
+    slug: "lseg-ai-programme-transformation",
     title: "London Stock Exchange Group: £5M AI Programme Transformation",
     client: "London Stock Exchange Group",
     industry: "Financial Services",
@@ -25,6 +26,7 @@ const caseStudies = [
   },
   {
     id: 2,
+    slug: "transport-for-london-digital-transformation",
     title: "Transport for London: Large-Scale Digital Transformation",
     client: "Transport for London",
     industry: "Transportation",
@@ -41,6 +43,7 @@ const caseStudies = [
   },
   {
     id: 3,
+    slug: "schroders-serverless-architecture-migration",
     title: "Schroders: Serverless Architecture Migration",
     client: "Schroders Personal Wealth",
     industry: "Wealth Management",
@@ -57,6 +60,7 @@ const caseStudies = [
   },
   {
     id: 4,
+    slug: "rbs-natwest-next-generation-mortgage-platform",
     title: "RBS/NatWest: Next-Generation Mortgage Platform",
     client: "RBS/NatWest",
     industry: "Banking",
@@ -73,6 +77,7 @@ const caseStudies = [
   },
   {
     id: 5,
+    slug: "hsbc-risk-management-system-optimization",
     title: "HSBC: Risk Management System Optimization",
     client: "HSBC Global Banking",
     industry: "Banking",
@@ -89,6 +94,7 @@ const caseStudies = [
   },
   {
     id: 6,
+    slug: "jp-morgan-operations-task-manager-enhancement",
     title: "JP Morgan: Operations Task Manager Enhancement",
     client: "JP Morgan CIB",
     industry: "Investment Banking",
@@ -135,7 +141,7 @@ export function CaseStudiesList() {
                     <span className="font-medium">{caseStudy.client}</span>
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3 hover:text-purple-600 transition-colors">
-                    <Link href={`/case-studies/${caseStudy.id}`}>{caseStudy.title}</Link>
+                    <Link href={`/case-studies/${caseStudy.slug}`}>{caseStudy.title}</Link>
                   </h3>
                   <p className="text-gray-600 mb-4">{caseStudy.excerpt}</p>
 
@@ -164,7 +170,7 @@ export function CaseStudiesList() {
                   </div>
                 </CardContent>
                 <CardFooter className="pt-0">
-                  {/* <Link href={`/case-studies/${caseStudy.id}`} className="w-full">
+                  {/* <Link href={`/case-studies/${caseStudy.slug}`} className="w-full">
                     <Button variant="ghost" className="w-full text-purple-600 hover:text-purple-700 hover:bg-purple-50">
                       Read Full Case Study <ArrowRight className="h-4 w-4 ml-2" />
                     </Button>
@@ -198,7 +204,7 @@ export function CaseStudiesList() {
                     <span className="font-medium">{caseStudy.client}</span>
                   </div>
                   <h3 className="text-lg font-bold text-gray-900 mb-2 hover:text-purple-600 transition-colors line-clamp-2">
-                    <Link href={`/case-studies/${caseStudy.id}`}>{caseStudy.title}</Link>
+                    <Link href={`/case-studies/${caseStudy.slug}`}>{caseStudy.title}</Link>
                   </h3>
                   <p className="text-gray-600 text-sm mb-4 line-clamp-2">{caseStudy.excerpt}</p>
 
@@ -222,7 +228,7 @@ export function CaseStudiesList() {
                   </div>
                 </CardContent>
                 <CardFooter className="pt-0">
-                  {/* <Link href={`/case-studies/${caseStudy.id}`} className="w-full">
+                  {/* <Link href={`/case-studies/${caseStudy.slug}`} className="w-full">
                     <Button variant="ghost" className="w-full text-purple-600 hover:text-purple-700 hover:bg-purple-50">
                       View Details <ArrowRight className="h-4 w-4 ml-2" />
                     </Button>
